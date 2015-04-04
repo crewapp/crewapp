@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var path = require('path');
 
 var Messages = Sequelize.define('Messages', {
-  message: Sequelize.STRING,
+  message: Sequelize.TEXT,
   timestamp: Sequelize.DATE,
 });
 
@@ -11,4 +11,4 @@ var Users = Sequelize.define('Users', {
 })
 
 Users.hasMany(Messages);
-Messages.hasOne(Users)
+Messages.hasOne(Users);
