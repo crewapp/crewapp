@@ -1,5 +1,4 @@
 var Sequelize = require('sequelize');
-var path = require('path');
 
 var Messages = Sequelize.define('Messages', {
   message: Sequelize.TEXT,
