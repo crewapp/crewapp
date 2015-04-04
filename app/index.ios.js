@@ -10,22 +10,22 @@ var {
   StyleSheet,
   Text,
   View,
+  TextInput
 } = React;
+
+//TODO: Add add a text field to app
+//TODO: Add a text input to app
+
+
 
 var app = React.createClass({
   render: function() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+Control+Z for dev menu
-        </Text>
+      <View>
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          // onChangeText={(text) => this.setState({input: text})}
+        />
       </View>
     );
   }
