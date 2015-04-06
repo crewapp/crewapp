@@ -10,22 +10,15 @@ var {
   StyleSheet,
   Text,
   View,
-  TextInput
 } = React;
-
-//TODO: Add add a text field to app
-//TODO: Add a text input to app
-
-
 
 var app = React.createClass({
   render: function() {
     return (
-      <View>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          // onChangeText={(text) => this.setState({input: text})}
-        />
+      <View style={styles.container}>
+        <Text style={styles.instructions}>
+          This is where we will have all of our chats
+        </Text>
       </View>
     );
   }
