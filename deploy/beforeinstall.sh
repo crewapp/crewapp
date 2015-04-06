@@ -10,3 +10,4 @@ sudo rm -rf /home/ubuntu/public/server
 # make fresh directories
 mkdir /home/ubuntu/public/client
 mkdir /home/ubuntu/public/server
+
