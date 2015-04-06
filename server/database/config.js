@@ -25,6 +25,5 @@ Users.sync();
 Users.hasMany(Messages);
 Messages.hasOne(Users);
 
-
 exports.Messages = Messages;
 exports.Users = Users;
