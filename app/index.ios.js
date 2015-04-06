@@ -1,7 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
@@ -15,6 +11,7 @@ var {
   Text,
   TextInput,
   View,
+  AlertIOS,
 } = React;
 
 var app = React.createClass({
@@ -35,13 +32,21 @@ var Submit = React.createClass({
   render: function() {
     return (
     <View>
-      <TextInput style={{height: 20, width: 200, borderColor: 'gray', borderWidth: 1}} />
+      <TextInput
+        onSubmitEditing={function(){AlertIOS.alert('Pavan')}}
+        style={styles.input} />
     </View>
     );
   }
 })
 
 var styles = StyleSheet.create({
+  input: {
+    height: 20,
+    width: 200,
+    borderColor: 'gray',
+    borderWidth: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
