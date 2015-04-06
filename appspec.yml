@@ -90,7 +90,7 @@ hooks:
 # During the BeforeInstall deployment lifecycle event, run the commands 
 #   in the script specified in "location".
   BeforeInstall:
-    - location: /deploy/beforeinstall.sh
+    - location: ./deploy/beforeinstall.sh
       # timeout:
       # runas: 
     # - location: ./deploy/start.sh
@@ -116,7 +116,7 @@ hooks:
       # runas:
 # During the ValidateService deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  ValidateService:
+  # ValidateService:
     # - location:
       # timeout: 
       # runas:
