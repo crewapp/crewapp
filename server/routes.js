@@ -10,14 +10,16 @@ var router = require('express').Router();
 // });
 
 // Add new message to database
-router.route('/api/message').post(function(req, res){
+router.route('/message').post(function(req, res){
   Database.Messages.create ({
     message: req.body.message,
     name: req.body.name
-  })
+  }).success(function(data){
+    res.end();
+  });
 });
 
-router.route('/api/message').get(function(req, res){
+router.route('/message').get(function(req, res){
   Database.Messages.findAll({
     limit: 50
   }).success(function(data){
