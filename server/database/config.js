@@ -13,7 +13,6 @@ var orm = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password,
 var Messages = orm.define('messages', {
   message: Sequelize.TEXT,
   name: Sequelize.STRING,
-  timestamp: Sequelize.DATE
 });
 
 // var Users = orm.define('users', {
