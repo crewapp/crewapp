@@ -19,7 +19,6 @@ router.route('/api/message').post(function(req, res){
 
 router.route('/api/message').get(function(req, res){
   Database.Messages.findAll({
-    // returns an object for me to res.json it
     limit: 50
   }).success(function(data){
     res.json(data);
