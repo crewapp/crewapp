@@ -1,10 +1,12 @@
 'use strict';
 
 var React = require('react-native');
-
 var MOCKED_CHAT_DATA = [
   {member: 'Richard', message: 'To the apple store!'},
 ]
+
+var name;
+
 var {
   AppRegistry,
   StyleSheet,
@@ -19,6 +21,7 @@ var app = React.createClass({
     var chat = MOCKED_CHAT_DATA[0];
     return (
       <View style={styles.container}>
+        <Name />
         <Text style={styles.instructions}>
           {chat.member + ': ' + chat.message}
         </Text>
@@ -28,12 +31,34 @@ var app = React.createClass({
   }
 });
 
+var Name = React.createClass({
+  handleSubmit: function(text){
+    name = (text.nativeEvent.text);
+    text.nativeEvent.text = '';
+    AlertIOS.alert(name);
+  },
+  render: function() {
+    return (
+      <View>
+        <TextInput
+          value="Name"
+          onSubmitEditing={(text) => this.handleSubmit(text)}
+          style={styles.input} />
+      </View>
+    )
+  }
+})
+
 var Submit = React.createClass({
+  handleSubmit: function(e) {
+    AlertIOS.alert('Pavan');
+    console.log();
+  },
   render: function() {
     return (
     <View>
       <TextInput
-        onSubmitEditing={function(){AlertIOS.alert('Pavan')}}
+        onSubmitEditing={this.handleSubmit}
         style={styles.input} />
     </View>
     );
