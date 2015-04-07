@@ -6,6 +6,7 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
+    "pubnub": "^3.7.10",
     "react-native": "^0.3.4"
   }
 }
