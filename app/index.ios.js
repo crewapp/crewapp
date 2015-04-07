@@ -2,7 +2,7 @@
 
 var React = require('react-native');
 var MOCKED_CHAT_DATA = [
-  {member: 'Richard', message: 'To the apple store!'}
+  {member: 'Richard', message: 'To the apple stdore!'}
 ];
 
 var name;
@@ -13,10 +13,23 @@ var {
   Text,
   TextInput,
   View,
+  ListView,
   AlertIOS
 } = React;
 
 var app = React.createClass({
+  render: function() {
+    return (
+      <View style={styles.container}>
+        <ChatList />
+        <Name />
+        <Submit />
+      </View>
+    );
+  }
+});
+
+var ChatList = React.createClass({
   render: function() {
     var chatNodes = MOCKED_CHAT_DATA.map(function (message) {
       return (
@@ -25,13 +38,10 @@ var app = React.createClass({
         </Chat>
       );
     });
+    console.log(chatNodes)
     return (
-      <View style={styles.container}>
-        <Text style={styles.instructions}>
-          {chatNodes}
-        </Text>
-        <Name />
-        <Submit />
+      <View>
+        {chatNodes}
       </View>
     );
   }
@@ -41,7 +51,6 @@ var Chat = React.createClass({
   render: function() {
     return (
       <Text style={styles.instructions}>
-        {this.props.children}
       </Text>
     );
   }
