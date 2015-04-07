@@ -18,18 +18,34 @@ var {
 
 var app = React.createClass({
   render: function() {
-    var chat = MOCKED_CHAT_DATA[0];
+    var chatNodes = MOCKED_CHAT_DATA.map(function (message) {
+      return (
+        <Chat member={message.member}>
+          {message.message}
+        </Chat>
+      );
+    });
     return (
       <View style={styles.container}>
-        <Name />
         <Text style={styles.instructions}>
-          {chat.member + ': ' + chat.message}
+          {chatNodes}
         </Text>
+        <Name />
         <Submit />
       </View>
     );
   }
 });
+
+var Chat = React.createClass({
+  render: function() {
+    return (
+      <Text style={styles.instructions}>
+        {this.props.children}
+      </Text>
+    );
+  }
+})
 
 var Name = React.createClass({
   handleSubmit: function(e){
@@ -51,7 +67,8 @@ var Name = React.createClass({
 var Submit = React.createClass({
   handleSubmit: function(e) {
     var chat = e.nativeEvent.text;
-    AlertIOS.alert(chat);
+    MOCKED_CHAT_DATA.push({member: name, message: chat});
+    console.log(MOCKED_CHAT_DATA);
   },
   render: function() {
     return (
