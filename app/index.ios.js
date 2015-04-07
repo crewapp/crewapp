@@ -32,16 +32,15 @@ var app = React.createClass({
 });
 
 var Name = React.createClass({
-  handleSubmit: function(text){
-    name = (text.nativeEvent.text);
-    text.nativeEvent.text = '';
-    AlertIOS.alert(name);
+  handleSubmit: function(e){
+    name = e.nativeEvent.text;
+    AlertIOS.alert('Got it, thanks!');
   },
   render: function() {
     return (
       <View>
         <TextInput
-          value="Name"
+          value="Please type in name"
           onSubmitEditing={(text) => this.handleSubmit(text)}
           style={styles.input} />
       </View>
@@ -51,8 +50,8 @@ var Name = React.createClass({
 
 var Submit = React.createClass({
   handleSubmit: function(e) {
-    AlertIOS.alert('Pavan');
-    console.log();
+    var chat = e.nativeEvent.text;
+    AlertIOS.alert(chat);
   },
   render: function() {
     return (
