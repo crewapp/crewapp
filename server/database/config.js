@@ -15,15 +15,15 @@ var Messages = orm.define('messages', {
   name: Sequelize.STRING
 });
 
-// var Users = orm.define('users', {
-//   name: Sequelize.STRING
-// });
+var Users = orm.define('users', {
+  name: Sequelize.STRING
+});
 
 Messages.sync();
-// Users.sync();
+Users.sync();
 
 // Users.hasMany(Messages);
 // Messages.hasOne(Users);
 
 exports.Messages = Messages;
-// exports.Users = Users;
+exports.Users = Users;
