@@ -75,7 +75,7 @@ var Submit = React.createClass({
   handleSubmit: function(e) {
     var chat = e.nativeEvent.text;
     MOCKED_CHAT_DATA.push({member: name, message: chat});
-    PUBNUB_obj.publish({
+    pubnub.publish({
       channel: 'CrewAppChannel',
       member: name, 
       message: chat
