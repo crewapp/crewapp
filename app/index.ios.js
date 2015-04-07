@@ -2,8 +2,8 @@
 
 var React = require('react-native');
 var MOCKED_CHAT_DATA = [
-  {member: 'Richard', message: 'To the apple store!'},
-]
+  {member: 'Richard', message: 'To the apple store!'}
+];
 
 var name;
 
@@ -13,7 +13,7 @@ var {
   Text,
   TextInput,
   View,
-  AlertIOS,
+  AlertIOS
 } = React;
 
 var app = React.createClass({
@@ -45,7 +45,7 @@ var Chat = React.createClass({
       </Text>
     );
   }
-})
+});
 
 var Name = React.createClass({
   handleSubmit: function(e){
@@ -60,9 +60,9 @@ var Name = React.createClass({
           onSubmitEditing={(text) => this.handleSubmit(text)}
           style={styles.input} />
       </View>
-    )
+    );
   }
-})
+});
 
 var Submit = React.createClass({
   handleSubmit: function(e) {
@@ -79,7 +79,7 @@ var Submit = React.createClass({
     </View>
     );
   }
-})
+});
 
 var styles = StyleSheet.create({
   input: {
@@ -103,7 +103,7 @@ var styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  },
+  }
 });
 
 AppRegistry.registerComponent('app', () => app);
