@@ -1,15 +1,17 @@
 'use strict';
 
 var React = require('react-native');
+var keyConfig = require('./keyConfig.js');
+
 var MOCKED_CHAT_DATA = [
   {member: 'Richard', message: 'To the apple store!'}
 ];
 
 var pubnub = require("pubnub")({
     ssl           : true,  // <- enable TLS Tunneling over TCP 
-    channel : 'CrewAppChannel',
-    publish_key   : "pub-c-ed3f13a5-4e20-4ea5-8760-1fce2f13b370",
-    subscribe_key : "sub-c-b92b6ee8-dd46-11e4-bb6f-0619f8945a4f"
+    channel : keyConfig.channel
+    publish_key   : keyConfig.publish_key,
+    subscribe_key : keyConfig.subscribe_key
 });
 
 var name;
