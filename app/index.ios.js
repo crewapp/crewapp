@@ -1,11 +1,20 @@
 'use strict';
 
 var React = require('react-native');
+var keyConfig = require('./keyConfig.js');
+
 var MOCKED_CHAT_DATA = [
   {member: 'Richard', message: 'To the apple stdore!'},
   {member: 'Pavan', message: 'HI'},
   {member: 'Arian', message: 'To the batmobile'}
 ];
+
+var pubnub = require("pubnub")({
+    ssl: true,  // <- enable TLS Tunneling over TCP 
+    channel: keyConfig.channel
+    publish_key: keyConfig.publish_key,
+    subscribe_key: keyConfig.subscribe_key
+});
 
 var name;
 
@@ -77,6 +86,11 @@ var Submit = React.createClass({
   handleSubmit: function(e) {
     var chat = e.nativeEvent.text;
     MOCKED_CHAT_DATA.push({member: name, message: chat});
+    pubnub.publish({
+      channel: 'CrewAppChannel',
+      member: name, 
+      message: chat
+      });
     console.log(MOCKED_CHAT_DATA);
   },
   render: function() {
