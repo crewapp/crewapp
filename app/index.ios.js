@@ -2,7 +2,9 @@
 
 var React = require('react-native');
 var MOCKED_CHAT_DATA = [
-  {member: 'Richard', message: 'To the apple stdore!'}
+  {member: 'Richard', message: 'To the apple stdore!'},
+  {member: 'Pavan', message: 'HI'},
+  {member: 'Arian', message: 'To the batmobile'},
 ];
 
 var name;
@@ -30,21 +32,20 @@ var app = React.createClass({
 });
 
 var ChatList = React.createClass({
+  getInitialState: function() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    return {
+      dataSource: ds.cloneWithRows(MOCKED_CHAT_DATA),
+    };
+  },
   render: function() {
-    var chatNodes = MOCKED_CHAT_DATA.map(function (message) {
-      return (
-        <Chat member={message.member}>
-          {message.message}
-        </Chat>
-      );
-    });
-    console.log(chatNodes)
     return (
-      <View>
-        {chatNodes}
-      </View>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <Text>{rowData}</Text>}
+      />
     );
-  }
+  },
 });
 
 var Chat = React.createClass({
@@ -59,7 +60,6 @@ var Chat = React.createClass({
 var Name = React.createClass({
   handleSubmit: function(e){
     name = e.nativeEvent.text;
-    AlertIOS.alert('Got it, thanks!');
   },
   render: function() {
     return (
@@ -101,7 +101,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'tan',
   },
   welcome: {
     fontSize: 20,
