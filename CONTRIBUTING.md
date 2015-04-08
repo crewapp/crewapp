@@ -42,12 +42,12 @@
   - Fix any issues raised by your code reviwer and push your fixes as a single new commit.
   - Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 6. Post-Merge
-  If you pull request was merged, you should delete the branch on local and remote
-  Local Delete
-  ```bash
-  git branch -D crewapp/crewapp#40
-  ```
-  Remote Delete
-  ```bash
-  git push origin --delete crewapp/crewapp#40
-  ```
+  - If you pull request was merged, you should delete the branch on local and remote
+    - Local Delete
+    ```bash
+    git branch -D crewapp/crewapp#40
+    ```
+    - Remote Delete
+    ```bash
+    git push origin --delete crewapp/crewapp#40
+    ```
