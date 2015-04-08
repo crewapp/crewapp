@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
-
-  grunt.loadNpmTasks('grunt-shell');
-
+  'use strict';
   /* Project configuration */
   grunt.initConfig({
     shell: {
@@ -17,12 +15,26 @@ module.exports = function(grunt) {
           'npm install'
           ].join(' && ')
       }
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        ignores: ['./**/node_modules'],
+        additionalSuffixes: ['.ios.js']
+      },
+      all: ['./']
     }
   });
+
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-jsxhint');
   
   /* Build Tasks */
   grunt.registerTask('build-web', ['shell:build-web']);
   grunt.registerTask('build-app', ['shell:build-app']);
 
   grunt.registerTask('build', ['build-web', 'build-app']);
+
+  /* Testing */
+  grunt.registerTask('test', ['jshint']);
 };
