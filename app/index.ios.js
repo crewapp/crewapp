@@ -8,10 +8,10 @@ var MOCKED_CHAT_DATA = [
 ];
 
 var pubnub = require("pubnub")({
-    ssl           : true,  // <- enable TLS Tunneling over TCP 
-    channel : keyConfig.channel
-    publish_key   : keyConfig.publish_key,
-    subscribe_key : keyConfig.subscribe_key
+    ssl: true,  // <- enable TLS Tunneling over TCP 
+    channel: keyConfig.channel
+    publish_key: keyConfig.publish_key,
+    subscribe_key: keyConfig.subscribe_key
 });
 
 var name;
