@@ -16,6 +16,7 @@ var {
   TextInput,
   View,
   ListView,
+  NavigatorIOS,
   AlertIOS
 } = React;
 
@@ -31,6 +32,20 @@ var app = React.createClass({
   }
 });
 
+var Nav = React.createClass({
+  render: function() {
+    return (
+      <NavigatorIOS
+        style={styles.nav}
+        initialRoute={{
+          title: 'Crew',
+          component: app
+        }}
+      ></NavigatorIOS>
+    )
+  }
+});
+
 var ChatList = React.createClass({
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -42,8 +57,8 @@ var ChatList = React.createClass({
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>{rowData}</Text>}
-      />
+        renderRow={(rowData) => <Chat author={rowData.member}>{rowData.message}</Chat>}>
+      </ListView>
     );
   },
 });
@@ -51,7 +66,8 @@ var ChatList = React.createClass({
 var Chat = React.createClass({
   render: function() {
     return (
-      <Text style={styles.instructions}>
+      <Text style={styles.text}>
+      {this.props.author}: {this.props.children}
       </Text>
     );
   }
@@ -65,7 +81,7 @@ var Name = React.createClass({
     return (
       <View>
         <TextInput
-          value="Please type in name"
+          placeholder="Please type in name"
           onSubmitEditing={(text) => this.handleSubmit(text)}
           style={styles.input} />
       </View>
@@ -92,26 +108,31 @@ var Submit = React.createClass({
 
 var styles = StyleSheet.create({
   input: {
-    height: 20,
-    width: 200,
-    borderColor: 'gray',
-    borderWidth: 1
+    height: 36,
+    width:  200,
+    padding: 4,
+    marginRight: 5,
+    flex: 4,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#48BBEC',
+    borderRadius: 8,
+    color: '#48BBEC'
+  },
+  nav: {
+    flex: 1
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'tan'
+    backgroundColor: 'white',
+    marginTop: 20
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
+  text: {
+    color: 'black',
+    backgroundColor: 'white',
+    fontSize: 20
   }
 });
 
