@@ -4,7 +4,7 @@ var React = require('react-native');
 var MOCKED_CHAT_DATA = [
   {member: 'Richard', message: 'To the apple stdore!'},
   {member: 'Pavan', message: 'HI'},
-  {member: 'Arian', message: 'To the batmobile'},
+  {member: 'Arian', message: 'To the batmobile'}
 ];
 
 var name;
@@ -35,7 +35,7 @@ var ChatList = React.createClass({
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
-      dataSource: ds.cloneWithRows(MOCKED_CHAT_DATA),
+      dataSource: ds.cloneWithRows(MOCKED_CHAT_DATA)
     };
   },
   render: function() {
@@ -101,17 +101,17 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'tan',
+    backgroundColor: 'tan'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    marginBottom: 5
   }
 });
 
