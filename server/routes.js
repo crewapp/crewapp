@@ -10,22 +10,36 @@ var router = require('express').Router();
 // });
 
 // Add new message to database
-router.route('/message').post(function(req, res){
-  Database.Messages.create ({
-    message: req.body.message,
-    name: req.body.name
-  }).success(function(data){
-    res.end();
-  });
-});
+// router.route('/message').post(function(req, res){
+//   Database.Messages.create ({
+//     message: req.body.message,
+//     name: req.body.name
+//   }).success(function(data){
+//     res.end();
+//   });
+// });
 
-router.route('/message').get(function(req, res){
-  Database.Messages.findAll({
-    limit: 50
-  }).success(function(data){
-    res.json(data);
-  })
-});
+// router.route('/message').get(function(req, res){
+//   Database.Messages.findAll({
+//     limit: 50
+//   }).success(function(data){
+//     res.json(data);
+//   });
+// });
+
+// router.route('/users').post(function(req, res){
+//   Database.Users.create ({
+//     name: req.body.name
+//   }).success(function(data){
+//     res.end();
+//   });
+// });
+
+// router.route('/users').get(function(req, res){
+//   Database.Users.findAll().success(function(data){
+//     res.json(data);
+//   });
+// });
 
 
 module.exports = router;
