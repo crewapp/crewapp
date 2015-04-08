@@ -16,6 +16,7 @@ var {
   TextInput,
   View,
   ListView,
+  NavigatorIOS,
   AlertIOS
 } = React;
 
@@ -28,6 +29,20 @@ var app = React.createClass({
         <Submit />
       </View>
     );
+  }
+});
+
+var Nav = React.createClass({
+  render: function() {
+    return (
+      <NavigatorIOS
+        style={styles.nav}
+        initialRoute={{
+          title: 'Crew',
+          component: app
+        }}
+      ></NavigatorIOS>
+    )
   }
 });
 
@@ -104,11 +119,15 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     color: '#48BBEC'
   },
+  nav: {
+    flex: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    marginTop: 20
   },
   text: {
     color: 'black',
