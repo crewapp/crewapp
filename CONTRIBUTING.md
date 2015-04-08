@@ -5,9 +5,7 @@
 1. Create an issue
   - Use github to create the issue
   - Add labels that apply to your issue
-  - Add two milestones
-    - A major milestone
-    - A nightly milestone
+  - Add a nightly milestone (reviewed at 7:30pm)
 2. Working on an issue
   - Create a branch that refernces the issue id you are working on
   ```bash
@@ -17,6 +15,7 @@
   ```bash
   git push origin crewapp/crewapp#40
   ```
+  - NOTE: you might need to escape `#`
 3. Making commits to your feature branch
   - Write a commit message that describes what the commit is doing
   - Once you feel a commit has fixed an issue, use one of these keywords in your commit message, and include issue number `#40`
