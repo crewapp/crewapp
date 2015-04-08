@@ -2,7 +2,9 @@
 
 var React = require('react-native');
 var MOCKED_CHAT_DATA = [
-  {member: 'Richard', message: 'To the apple store!'}
+  {member: 'Richard', message: 'To the apple stdore!'},
+  {member: 'Pavan', message: 'HI'},
+  {member: 'Arian', message: 'To the batmobile'}
 ];
 
 var name;
@@ -13,23 +15,15 @@ var {
   Text,
   TextInput,
   View,
+  ListView,
   AlertIOS
 } = React;
 
 var app = React.createClass({
   render: function() {
-    var chatNodes = MOCKED_CHAT_DATA.map(function (message) {
-      return (
-        <Chat member={message.member}>
-          {message.message}
-        </Chat>
-      );
-    });
     return (
       <View style={styles.container}>
-        <Text style={styles.instructions}>
-          {chatNodes}
-        </Text>
+        <ChatList />
         <Name />
         <Submit />
       </View>
@@ -37,11 +31,27 @@ var app = React.createClass({
   }
 });
 
+var ChatList = React.createClass({
+  getInitialState: function() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    return {
+      dataSource: ds.cloneWithRows(MOCKED_CHAT_DATA)
+    };
+  },
+  render: function() {
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <Text>{rowData}</Text>}
+      />
+    );
+  },
+});
+
 var Chat = React.createClass({
   render: function() {
     return (
       <Text style={styles.instructions}>
-        {this.props.children}
       </Text>
     );
   }
@@ -50,7 +60,6 @@ var Chat = React.createClass({
 var Name = React.createClass({
   handleSubmit: function(e){
     name = e.nativeEvent.text;
-    AlertIOS.alert('Got it, thanks!');
   },
   render: function() {
     return (
@@ -92,17 +101,17 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'tan'
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    marginBottom: 5
   }
 });
 
