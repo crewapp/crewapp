@@ -1,3 +1,4 @@
+'use strict';
 //------ Require: General Server ----//
 var express = require('express');
 
@@ -18,7 +19,6 @@ var routes = require('./routes.js');
 chatApp.use(express.static(__dirname + '/../test'));
 
 io.on('connection', function(socket){
-  'use strict';
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
