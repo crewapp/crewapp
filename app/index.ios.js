@@ -19,12 +19,18 @@ var {
 var io = require('react-native-sockets-io');
 
 var app = React.createClass({
+  getInitialState: function() {
+    return {io: io('http://localhost:5000', {jsonp: false})};
+  },
+  componentDidMount: function() {
+    this.state.io.emit('chat message', "hello");
+  },
   render: function() {
     return (
       <View style={styles.container}>
-        <ChatList />
+        <ChatList socket={this.state.io} />
         <Name />
-        <Submit />
+        <Submit socket={this.state.io} />
       </View>
     );
   }
@@ -40,7 +46,7 @@ var Nav = React.createClass({
           component: app
         }}
       ></NavigatorIOS>
-    )
+    );
   }
 });
 
@@ -51,8 +57,7 @@ var ChatList = React.createClass({
   componentDidMount: function(){
   //Must specifiy 'jsonp: false' since react native doesn't provide the dom
   //and thus wouldn't support creating an iframe/script tag
-    this.socket = io('http://localhost:5000',{jsonp: false});
-    this.socket.on('chat message', (msg) =>{
+    this.props.socket.on('chat message', (msg) =>{
       this.state.messages.push(msg);
       this.forceUpdate();
     });
@@ -66,7 +71,7 @@ var ChatList = React.createClass({
           })
         }
       </View>
-    )
+    );
   }
 });
 
@@ -99,10 +104,13 @@ var Name = React.createClass({
 var Submit = React.createClass({
   handleSubmit: function(e) {
     var chat = e.nativeEvent.text;
-    MOCKED_CHAT_DATA.push({member: name, message: chat});
-    console.log(MOCKED_CHAT_DATA);
+    this.send(chat);
+  },
+  send: function(message) {
+    this.props.socket.emit('chat message', message);
   },
   render: function() {
+    this.send('hello');
     return (
     <View>
       <TextInput
