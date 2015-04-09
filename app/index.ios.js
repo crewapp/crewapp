@@ -16,7 +16,7 @@ var {
   AlertIOS
 } = React;
 
-var io = require("./socket.io-client");
+var io = require('react-native-sockets-io');
 
 var app = React.createClass({
   render: function() {
