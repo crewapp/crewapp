@@ -50,6 +50,7 @@
     ```bash
     git push origin --delete crewapp/crewapp#40
     ```
+    
 ## Reporting a bug
 
 1. Create an issue
