@@ -1,11 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var MOCKED_CHAT_DATA = [
-  {member: 'Richard', message: 'To the apple stdore!'},
-  {member: 'Pavan', message: 'HI'},
-  {member: 'Arian', message: 'To the batmobile'}
-];
+var MOCKED_CHAT_DATA;
 
 var name;
 
@@ -19,6 +15,8 @@ var {
   NavigatorIOS,
   AlertIOS
 } = React;
+
+var io = require('react-native-sockets-io');
 
 var app = React.createClass({
   render: function() {
@@ -47,20 +45,29 @@ var Nav = React.createClass({
 });
 
 var ChatList = React.createClass({
-  getInitialState: function() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return {
-      dataSource: ds.cloneWithRows(MOCKED_CHAT_DATA)
-    };
+  getInitialState:function(){
+    return {messages: []}
   },
-  render: function() {
+  componentDidMount: function(){
+  //Must specifiy 'jsonp: false' since react native doesn't provide the dom
+  //and thus wouldn't support creating an iframe/script tag
+    this.socket = io('http://localhost:5000',{jsonp: false});
+    this.socket.on('chat message', (msg) =>{
+      this.state.messages.push(msg);
+      this.forceUpdate();
+    });
+  },
+  render: function(){
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Chat author={rowData.member}>{rowData.message}</Chat>}>
-      </ListView>
-    );
-  },
+      <View>
+        {
+          this.state.messages.map(m => {
+            return <Text>{m}</Text>
+          })
+        }
+      </View>
+    )
+  }
 });
 
 var Chat = React.createClass({
