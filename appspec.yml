@@ -26,6 +26,8 @@ files:
     destination: /home/ubuntu/public/server
   - source: ./client/
     destination: /home/ubuntu/public/client
+  - source: ./test/
+    destination: /home/ubuntu/public/test
 # For deployments to Amazon Linux and Ubuntu Server instances,
 #   you can specify a "permissions" 
 #   section here that describes special permissions to apply to the files 
