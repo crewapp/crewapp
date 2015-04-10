@@ -1,23 +1,23 @@
-'use strict';
+// 'use strict';
 
 var styles = require('./styles.js');
 var React = require('react-native');
 var t = require('tcomb-form-native');
 var NavigationBar = require('react-native-navbar');
-var MOCKED_CHAT_DATA;
+// var MOCKED_CHAT_DATA;
 
 var name = name || 'anonymous';
 
 var {
   AppRegistry,
-  StyleSheet,
-  Text,
-  TextInput,
+  // StyleSheet,
+  // Text,
+  // TextInput,
   View,
-  ListView,
-  NavigatorIOS,
-  AlertIOS,
-  TouchableHighlight
+  TouchableHighlight,
+  // ListView,
+  // NavigatorIOS,
+  // AlertIOS
 } = React;
 
 var io = require('react-native-sockets-io');
@@ -58,7 +58,7 @@ var app = React.createClass({
           <ChatList socket={this.state.io} />
         </View>
         <View style={styles.formBox}>
-          <MessageForm socket={this.state.io}  />
+          <MessageForm socket={this.state.io} />
         </View>
       </View>
     );
@@ -66,6 +66,7 @@ var app = React.createClass({
 });
 
 // Navigation
+/*
 var Nav = React.createClass({
   render: function() {
     return (
@@ -79,11 +80,15 @@ var Nav = React.createClass({
     );
   }
 });
+*/
 
 // List of messages
 var ChatList = React.createClass({
-  getInitialState:function(){
-    return {messages: []}
+  getInitialState: function(){
+    return {messages: []};
+  },
+  propTypes: {
+    socket: React.PropTypes.any
   },
   componentDidMount: function(){
   //Must specifiy 'jsonp: false' since react native doesn't provide the dom
@@ -98,7 +103,7 @@ var ChatList = React.createClass({
       <View>
         {
           this.state.messages.map(m => {
-            return <Text>{m.name}: {m.chat}</Text>
+            return <Text>{m.name}: {m.chat}</Text>;
           })
         }
       </View>
@@ -107,7 +112,12 @@ var ChatList = React.createClass({
 });
 
 // Individual message
+/*
 var Chat = React.createClass({
+  propTypes: {
+    author: React.PropTypes.string.isRequired,
+    children: React.PropTypes.any
+  },
   render: function() {
     return (
       <Text style={styles.text}>
@@ -116,6 +126,7 @@ var Chat = React.createClass({
     );
   }
 });
+*/
 
 // Unified Input Field
 
@@ -128,7 +139,9 @@ var MessageForm = React.createClass({
       this.send(value);
     }
   },
-
+  propTypes: {
+    socket: React.PropTypes.any
+  },
   send: function(message) {
     this.props.socket.emit('chat message', {name: name, chat: message});
   },
@@ -141,11 +154,12 @@ var MessageForm = React.createClass({
           type={Message}
           option={options}
         />
-        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor="#99d9f4">
           <Text style={styles.buttonText}>Send</Text>
         </TouchableHighlight>
       </View>
     );
   }
 });
+
 AppRegistry.registerComponent('app', () => app);
