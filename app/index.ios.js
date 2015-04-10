@@ -2,16 +2,18 @@
 
 var styles = require('./styles.js');
 var React = require('react-native');
+var t = require('tcomb-form-native');
 // var MOCKED_CHAT_DATA;
 
 var name = name || 'anonymous';
 
 var {
   AppRegistry,
-  StyleSheet,
-  Text,
-  TextInput,
+  // StyleSheet,
+  // Text,
+  // TextInput,
   View,
+  TouchableHighlight,
   // ListView,
   // NavigatorIOS,
   // AlertIOS
@@ -55,7 +57,7 @@ var app = React.createClass({
           <ChatList socket={this.state.io} />
         </View>
         <View style={styles.formBox}>
-          <MessageForm socket={this.state.io}  />
+          <MessageForm socket={this.state.io} />
         </View>
       </View>
     );
@@ -151,7 +153,7 @@ var MessageForm = React.createClass({
           type={Message}
           option={options}
         />
-        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor="#99d9f4">
           <Text style={styles.buttonText}>Send</Text>
         </TouchableHighlight>
       </View>
