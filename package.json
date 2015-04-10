@@ -16,8 +16,11 @@
   },
   "homepage": "https://github.com/arianf/crewapp",
   "dependencies": {
+    "eslint": "^0.18.0",
+    "eslint-plugin-react": "^2.1.0",
+    "esprima-fb": "^14001.1.0-dev-harmony-fb",
     "grunt": "^0.4.5",
-    "grunt-jsxhint": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.1",
     "grunt-shell": "^1.1.2",
     "react-tools": "^0.13.1"
   }
