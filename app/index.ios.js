@@ -16,7 +16,7 @@ var {
   ListView,
   NavigatorIOS,
   AlertIOS,
-  TouchableHighlight,
+  TouchableHighlight
 } = React;
 
 var io = require('react-native-sockets-io');
