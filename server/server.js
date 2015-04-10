@@ -15,11 +15,9 @@ var parser = require('body-parser');
 var routes = require('./routes.js');
 
 //----- Require: Database Config ----//
-
 var database = require('./database/config.js');
 
 //------ Chat Server ------//
-
 chatApp.use(express.static(__dirname + '/../test'));
 
 io.on('connection', function(socket){
@@ -27,7 +25,7 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
     database.Messages.create({
       message: msg.chat,
-      name: msg.name
+      name: msg.name || 'anonymous'
     });
   });
 });
@@ -35,7 +33,6 @@ io.on('connection', function(socket){
 chatServer.listen(process.env.CHATPORT || 5000);
 
 //------ Our App Server ------//
-
 app.use(express.static(__dirname + '/../client'));
 
 // Set up our body parser for query strings
