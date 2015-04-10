@@ -116,43 +116,6 @@ var Chat = React.createClass({
   }
 });
 
-// Username input field
-// var Name = React.createClass({
-//   handleSubmit: function(e){
-//     name = e.nativeEvent.text;
-//   },
-//   render: function() {
-//     return (
-//       <View>
-//         <TextInput
-//           placeholder="Please type in name"
-//           onSubmitEditing={(text) => this.handleSubmit(text)}
-//           style={styles.input} />
-//       </View>
-//     );
-//   }
-// });
-
-// Message input field
-// var Submit = React.createClass({
-//   handleSubmit: function(e) {
-//     var chat = e.nativeEvent.text;
-//     this.send(chat);
-//   },
-//   send: function(message) {
-//     this.props.socket.emit('chat message', message);
-//   },
-//   render: function() {
-//     return (
-//     <View>
-//       <TextInput
-//         onSubmitEditing={this.handleSubmit}
-//         style={styles.input} />
-//     </View>
-//     );
-//   }
-// });
-
 // Unified Input Field
 
 var MessageForm = React.createClass({
