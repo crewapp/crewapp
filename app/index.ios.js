@@ -11,12 +11,13 @@ var name = name || 'anonymous';
 var {
   AppRegistry,
   // StyleSheet,
-  // Text,
+  Text,
   // TextInput,
   View,
   TouchableHighlight,
   // ListView,
-  // NavigatorIOS,
+  Navigator,
+  InitialView
   // AlertIOS
 } = React;
 
@@ -48,12 +49,41 @@ var app = React.createClass({
   getInitialState: function() {
     return {io: io('http://localhost:5000', {jsonp: false})};
   },
+
   componentDidMount: function() {
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
   },
+
+  renderScene: function(route, navigator) {
+    var Component = route.component;
+    var navBar = route.navigationBar;
+
+    if (navBar) {
+      navBar = React.addons.cloneWithProps(navBar, {
+        navigator: navigator,
+        route: route
+      });
+    }
+
+    return (
+      <View style={styles.navigator}>
+      {navBar}
+      <Component navigator={navigator} route={route} />
+      </View>
+    );
+  },
+
   render: function() {
     return (
       <View style={styles.container}>
+        <Navigator
+          style={styles.navigator}
+          renderScene={this.renderScene}
+          initialRoute={{
+            component: InitialView,
+            navigationBar: <NavigationBar title="Initial View"/>
+          }}
+        />
         <View style={styles.chatBox}>
           <ChatList socket={this.state.io} />
         </View>
