@@ -18,13 +18,13 @@
     "trailing": true,
     "smarttabs": true,
     "white": true,
-    "globals"   : {
-        "describe"   : false,
-        "it"         : false,
-        "before"     : false,
-        "beforeEach" : false,
-        "after"      : false,
-        "afterEach"  : false,
+    "globals": {
+        "describe": false,
+        "it": false,
+        "before": false,
+        "beforeEach": false,
+        "after": false,
+        "afterEach": false,
         "io": true
     }
 }
