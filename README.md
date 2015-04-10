@@ -1,4 +1,4 @@
-# crewapp [![Stories in Ready](https://badge.waffle.io/crewapp/crewapp.png?label=ready&title=Ready)](https://waffle.io/crewapp/crewapp)
+# crewapp [![Stories in Ready](https://badge.waffle.io/crewapp/crewapp.png?label=in%20progress&title=In%20Progress)](https://waffle.io/crewapp/crewapp)
 The crew chooses you!
 
 # Installation Directions
