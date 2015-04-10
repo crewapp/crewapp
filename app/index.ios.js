@@ -135,7 +135,6 @@ var MessageForm = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        {/* display */}
         <Form
           ref="form"
           type={Message}
