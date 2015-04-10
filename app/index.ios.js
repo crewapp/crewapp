@@ -1,54 +1,43 @@
 // 'use strict';
 
-var styles = StyleSheet.create({
-  input: {
-    height: 36,
-    width: 200,
-    padding: 4,
-    marginRight: 5,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#48BBEC',
-    borderRadius: 8,
-    color: '#48BBEC'
-  },
-  nav: {
-    flex: 1
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    marginTop: 20
-  },
-  text: {
-    color: 'black',
-    backgroundColor: 'white',
-    fontSize: 20
-  }
-});
-
-
+var styles = require('./styles.js');
 var React = require('react-native');
+var t = require('tcomb-form-native');
 // var MOCKED_CHAT_DATA;
 
 var name = name || 'anonymous';
 
 var {
   AppRegistry,
-  StyleSheet,
   Text,
-  TextInput,
   View,
-  // ListView,
-  // NavigatorIOS,
-  // AlertIOS
+  TouchableHighlight,
 } = React;
 
 var io = require('react-native-sockets-io');
 
+var Form = t.form.Form;
+
+var Message = t.struct({
+  name: t.Str,
+  message: t.Str
+});
+
+var options = {
+  fields: {
+    name: {
+      placeholder: 'Your name',
+      error: 'You have to enter a name!'
+    },
+    message: {
+      placeholder: 'Enter a message',
+      error: 'You have to enter a message!',
+      multiline: true
+    }
+  }
+};
+
+// App container (top of the tree)
 var app = React.createClass({
   getInitialState: function() {
     return {io: io('http://localhost:5000', {jsonp: false})};
@@ -59,30 +48,18 @@ var app = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <ChatList socket={this.state.io} />
-        <Name />
-        <Submit socket={this.state.io} />
+        <View style={styles.chatBox}>
+          <ChatList socket={this.state.io} />
+        </View>
+        <View style={styles.formBox}>
+          <MessageForm socket={this.state.io} />
+        </View>
       </View>
     );
   }
 });
 
-/*
-var Nav = React.createClass({
-  render: function() {
-    return (
-      <NavigatorIOS
-        style={styles.nav}
-        initialRoute={{
-          title: 'Crew',
-          component: app
-        }}
-      ></NavigatorIOS>
-    );
-  }
-});
-*/
-
+// List of messages
 var ChatList = React.createClass({
   getInitialState: function(){
     return {messages: []};
@@ -111,42 +88,16 @@ var ChatList = React.createClass({
   }
 });
 
-/*
-var Chat = React.createClass({
-  propTypes: {
-    author: React.PropTypes.string.isRequired,
-    children: React.PropTypes.any
-  },
-  render: function() {
-    return (
-      <Text style={styles.text}>
-      {this.props.author}: {this.props.children}
-      </Text>
-    );
-  }
-});
-*/
+// Unified Input Field
 
-var Name = React.createClass({
-  handleSubmit: function(e){
-    name = e.nativeEvent.text;
-  },
-  render: function() {
-    return (
-      <View>
-        <TextInput
-          placeholder="Please type in name"
-          onSubmitEditing={(text) => this.handleSubmit(text)}
-          style={styles.input} />
-      </View>
-    );
-  }
-});
+var MessageForm = React.createClass({
+  onPress: function() {
+    // call getValue to get values of the form
 
-var Submit = React.createClass({
-  handleSubmit: function(e) {
-    var chat = e.nativeEvent.text;
-    this.send(chat);
+    var value = this.refs.form.getValue();
+    if (value) {
+      this.send(value);
+    }
   },
   propTypes: {
     socket: React.PropTypes.any
@@ -154,17 +105,21 @@ var Submit = React.createClass({
   send: function(message) {
     this.props.socket.emit('chat message', {name: name, chat: message});
   },
+
   render: function() {
-    this.send('hello');
     return (
-    <View>
-      <TextInput
-        onSubmitEditing={this.handleSubmit}
-        style={styles.input} />
-    </View>
+      <View style={styles.container}>
+        <Form
+          ref="form"
+          type={Message}
+          option={options}
+        />
+        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor="#99d9f4">
+          <Text style={styles.buttonText}>Send</Text>
+        </TouchableHighlight>
+      </View>
     );
   }
 });
-
 
 AppRegistry.registerComponent('app', () => app);
