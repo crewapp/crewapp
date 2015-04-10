@@ -4,21 +4,14 @@ var styles = require('./styles.js');
 var React = require('react-native');
 var t = require('tcomb-form-native');
 var NavigationBar = require('react-native-navbar');
-// var MOCKED_CHAT_DATA;
 
 var name = name || 'anonymous';
 
 var {
   AppRegistry,
-  // StyleSheet,
   Text,
-  // TextInput,
   View,
   TouchableHighlight,
-  // ListView,
-  Navigator,
-  InitialView
-  // AlertIOS
 } = React;
 
 var io = require('react-native-sockets-io');
@@ -95,23 +88,6 @@ var app = React.createClass({
   }
 });
 
-// Navigation
-/*
-var Nav = React.createClass({
-  render: function() {
-    return (
-      <NavigatorIOS
-        style={styles.nav}
-        initialRoute={{
-          title: 'Crew',
-          component: app
-        }}
-      ></NavigatorIOS>
-    );
-  }
-});
-*/
-
 // List of messages
 var ChatList = React.createClass({
   getInitialState: function(){
@@ -140,23 +116,6 @@ var ChatList = React.createClass({
     );
   }
 });
-
-// Individual message
-/*
-var Chat = React.createClass({
-  propTypes: {
-    author: React.PropTypes.string.isRequired,
-    children: React.PropTypes.any
-  },
-  render: function() {
-    return (
-      <Text style={styles.text}>
-      {this.props.name}: {this.props.message}
-      </Text>
-    );
-  }
-});
-*/
 
 // Unified Input Field
 
