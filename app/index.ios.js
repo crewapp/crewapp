@@ -1,9 +1,8 @@
-'use strict';
+// 'use strict';
 
 var styles = require('./styles.js');
 var React = require('react-native');
-var t = require('tcomb-form-native');
-var MOCKED_CHAT_DATA;
+// var MOCKED_CHAT_DATA;
 
 var name = name || 'anonymous';
 
@@ -13,10 +12,9 @@ var {
   Text,
   TextInput,
   View,
-  ListView,
-  NavigatorIOS,
-  AlertIOS,
-  TouchableHighlight
+  // ListView,
+  // NavigatorIOS,
+  // AlertIOS
 } = React;
 
 var io = require('react-native-sockets-io');
@@ -65,6 +63,7 @@ var app = React.createClass({
 });
 
 // Navigation
+/*
 var Nav = React.createClass({
   render: function() {
     return (
@@ -78,11 +77,15 @@ var Nav = React.createClass({
     );
   }
 });
+*/
 
 // List of messages
 var ChatList = React.createClass({
-  getInitialState:function(){
-    return {messages: []}
+  getInitialState: function(){
+    return {messages: []};
+  },
+  propTypes: {
+    socket: React.PropTypes.any
   },
   componentDidMount: function(){
   //Must specifiy 'jsonp: false' since react native doesn't provide the dom
@@ -97,7 +100,7 @@ var ChatList = React.createClass({
       <View>
         {
           this.state.messages.map(m => {
-            return <Text>{m.name}: {m.chat}</Text>
+            return <Text>{m.name}: {m.chat}</Text>;
           })
         }
       </View>
@@ -106,7 +109,12 @@ var ChatList = React.createClass({
 });
 
 // Individual message
+/*
 var Chat = React.createClass({
+  propTypes: {
+    author: React.PropTypes.string.isRequired,
+    children: React.PropTypes.any
+  },
   render: function() {
     return (
       <Text style={styles.text}>
@@ -115,6 +123,7 @@ var Chat = React.createClass({
     );
   }
 });
+*/
 
 // Unified Input Field
 
@@ -127,7 +136,9 @@ var MessageForm = React.createClass({
       this.send(value);
     }
   },
-
+  propTypes: {
+    socket: React.PropTypes.any
+  },
   send: function(message) {
     this.props.socket.emit('chat message', {name: name, chat: message});
   },
@@ -147,4 +158,5 @@ var MessageForm = React.createClass({
     );
   }
 });
+
 AppRegistry.registerComponent('app', () => app);
