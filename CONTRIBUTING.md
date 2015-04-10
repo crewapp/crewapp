@@ -50,3 +50,24 @@
     ```bash
     git push origin --delete crewapp/crewapp#40
     ```
+    
+## Reporting a bug
+
+1. Create an issue
+  - Use github to create the issue
+  - Add labels that apply to the bug
+  - Format your bug issue using the following section headers:
+  ```
+  bug issue section headers
+  -------------------------
+  - Explain the bug
+  - Steps to reproduce
+  - Expected results
+  - Actual results
+  - Technologies used
+  - Screenshots*
+  - Error logs
+  ```
+  *Screenshots are optional but recommended.
+
+2. Add appropriate detail to each section. For an example bug report please see: [Example bug issue](https://github.com/crewapp/crewapp/issues/61)
