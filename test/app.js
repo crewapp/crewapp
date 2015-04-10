@@ -5,5 +5,5 @@ $('form').submit(function(){
   return false;
 });
 socket.on('chat message', function(msg){
-  $('#messages').append($('<li>').text(msg));
+  $('#messages').append($('<li>').text(msg.name + ": " + msg.chat));
 });

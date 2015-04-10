@@ -3,7 +3,7 @@
 var React = require('react-native');
 var MOCKED_CHAT_DATA;
 
-var name;
+var name = name || 'anonymous';
 
 var {
   AppRegistry,
@@ -23,7 +23,7 @@ var app = React.createClass({
     return {io: io('http://localhost:5000', {jsonp: false})};
   },
   componentDidMount: function() {
-    this.state.io.emit('chat message', "hello");
+    this.state.io.emit('chat message', {name: name, chat: 'hello'});
   },
   render: function() {
     return (
@@ -67,7 +67,7 @@ var ChatList = React.createClass({
       <View>
         {
           this.state.messages.map(m => {
-            return <Text>{m}</Text>
+            return <Text>{m.name}: {m.chat}</Text>
           })
         }
       </View>
@@ -107,7 +107,7 @@ var Submit = React.createClass({
     this.send(chat);
   },
   send: function(message) {
-    this.props.socket.emit('chat message', message);
+    this.props.socket.emit('chat message', {name: name, chat: message});
   },
   render: function() {
     this.send('hello');
