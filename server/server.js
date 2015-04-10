@@ -14,6 +14,10 @@ var app = express();
 var parser = require('body-parser');
 var routes = require('./routes.js');
 
+//----- Require: Database Config ----//
+
+var database = require('./database/config.js');
+
 //------ Chat Server ------//
 
 chatApp.use(express.static(__dirname + '/../test'));
@@ -21,6 +25,10 @@ chatApp.use(express.static(__dirname + '/../test'));
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
+    database.Messages.create({
+      message: msg.chat,
+      name: msg.name
+    });
   });
 });
 
