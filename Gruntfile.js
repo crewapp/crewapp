@@ -19,16 +19,22 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        ignores: ['./**/node_modules'],
-        additionalSuffixes: ['.ios.js']
+        ignores: ['./**/node_modules', '**/*.ios.js'], 
       },
       all: ['./']
+    },
+    eslint: {
+      options: {
+        eslintrc: '.eslintrc',
+      },
+      target: ['./app/index.ios.js']
     }
   });
 
   grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-jsxhint');
-  
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-eslint');
+
   /* Build Tasks */
   grunt.registerTask('build-web', ['shell:build-web']);
   grunt.registerTask('build-app', ['shell:build-app']);
@@ -36,5 +42,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['build-web', 'build-app']);
 
   /* Testing */
-  grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('test', ['jshint', 'eslint']);
 };
