@@ -3,6 +3,7 @@
 var styles = require('./styles.js');
 var React = require('react-native');
 var t = require('tcomb-form-native');
+var NavigationBar = require('react-native-navbar');
 var MOCKED_CHAT_DATA;
 
 var name = name || 'anonymous';
