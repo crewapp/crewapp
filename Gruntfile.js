@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        ignores: ['./**/node_modules', '**/*.ios.js'], 
+        ignores: ['./**/node_modules', '**/*.ios.js', 'app/views/**.js'], 
       },
       all: ['./']
     },
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       options: {
         eslintrc: '.eslintrc',
       },
-      target: ['./app/index.ios.js']
+      target: ['./app/index.ios.js', 'app/views/**.js']
     }
   });
 
