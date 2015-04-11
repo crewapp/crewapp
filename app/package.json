@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "react-native": "^0.3.4",
-    "react-sockets": "crewapp/react-native-sockets-io"
+    "react-sockets": "crewapp/react-native-sockets-io",
+    "tcomb": "^1.0.1",
+    "tcomb-form-native": "^0.1.6",
+    "tcomb-validation": "^1.0.3"
   }
 }
