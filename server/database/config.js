@@ -12,7 +12,7 @@ var orm = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password,
 
 var Messages = orm.define('messages', {
   message: Sequelize.TEXT,
-  name: Sequelize.STRING,
+  name: Sequelize.STRING
 });
 
 Messages.sync();
