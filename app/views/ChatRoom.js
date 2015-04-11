@@ -1,5 +1,3 @@
-// 'use strict';
-
 var styles = require('../styles.js');
 var React = require('react-native');
 
