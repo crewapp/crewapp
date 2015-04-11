@@ -15,7 +15,11 @@ var Messages = orm.define('messages', {
   name: Sequelize.STRING
 });
 
+var Groups = orm.define('groups', {
+});
+
 Messages.sync();
+Groups.sync();
 
 exports.Messages = Messages;
-// exports.Users = Users;
+
