@@ -3,7 +3,6 @@
 var styles = require('./styles.js');
 var React = require('react-native');
 var t = require('tcomb-form-native');
-var NavigationBar = require('react-native-navbar');
 
 var name = name || 'anonymous';
 
@@ -12,6 +11,8 @@ var {
   Text,
   View,
   TouchableHighlight,
+  NavigatorIOS,
+  InitialView
 } = React;
 
 var io = require('react-native-sockets-io');
@@ -39,6 +40,20 @@ var options = {
 
 // App container (top of the tree)
 var app = React.createClass({
+  render: function(){
+    return (
+      <NavigatorIOS
+        style={styles.container}
+        tintColor='#FF6600'
+        initialRoute={{
+          title: 'Chat Room',
+          component: ChatRoom
+        }} />
+    )
+  }
+})
+
+var ChatRoom = React.createClass({
   getInitialState: function() {
     return {io: io('http://localhost:5000', {jsonp: false})};
   },
@@ -47,36 +62,9 @@ var app = React.createClass({
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
   },
 
-  renderScene: function(route, navigator) {
-    var Component = route.component;
-    var navBar = route.navigationBar;
-
-    if (navBar) {
-      navBar = React.addons.cloneWithProps(navBar, {
-        navigator: navigator,
-        route: route
-      });
-    }
-
-    return (
-      <View style={styles.navigator}>
-      {navBar}
-      <Component navigator={navigator} route={route} />
-      </View>
-    );
-  },
-
   render: function() {
     return (
       <View style={styles.container}>
-        <Navigator
-          style={styles.navigator}
-          renderScene={this.renderScene}
-          initialRoute={{
-            component: InitialView,
-            navigationBar: <NavigationBar title="Initial View"/>
-          }}
-        />
         <View style={styles.chatBox}>
           <ChatList socket={this.state.io} />
         </View>
