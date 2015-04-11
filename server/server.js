@@ -21,6 +21,17 @@ var database = require('./database/config.js');
 chatApp.use(express.static(__dirname + '/../test'));
 
 io.on('connection', function(socket){
+  //Show 5 most recent chats to user upon login
+  database.Messages.findAll({
+    limit: 5,
+    order: 'createdAt DESC'
+  }).success(function(data){
+    for (var i=0; i<5; i++){
+      var messages = data[i].dataValues;
+      io.emit('chat message', {name: messages.name, chat: messages.message});
+    }
+  });
+
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
     database.Messages.create({
