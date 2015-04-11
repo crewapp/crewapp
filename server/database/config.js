@@ -12,18 +12,10 @@ var orm = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password,
 
 var Messages = orm.define('messages', {
   message: Sequelize.TEXT,
-  name: Sequelize.STRING
-});
-
-var Users = orm.define('users', {
-  name: Sequelize.STRING
+  name: Sequelize.STRING,
 });
 
 Messages.sync();
-Users.sync();
-
-Users.hasMany(Messages);
-Messages.hasOne(Users);
 
 exports.Messages = Messages;
-exports.Users = Users;
+// exports.Users = Users;
