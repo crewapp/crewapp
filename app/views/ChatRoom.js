@@ -15,16 +15,11 @@ var {
 } = React;
 
 var Message = t.struct({
-  name: t.Str,
   message: t.Str
 });
 
 var options = {
   fields: {
-    name: {
-      placeholder: 'Your name',
-      error: 'You have to enter a name!'
-    },
     message: {
       placeholder: 'Enter a message',
       error: 'You have to enter a message!',
@@ -89,9 +84,8 @@ var ChatList = React.createClass({
 
 var MessageForm = React.createClass({
   onPress: function() {
-    // call getValue to get values of the form
-
     var value = this.refs.form.getValue();
+    console.log('inside onPress -> value !');
     if (value) {
       this.send(value);
     }
@@ -100,6 +94,8 @@ var MessageForm = React.createClass({
     socket: React.PropTypes.any
   },
   send: function(message) {
+    console.log('in send');
+    // Name is still being referenced here because it passes in 'anonymous' for the time being and the username after we implement authentication
     this.props.socket.emit('chat message', {name: name, chat: message});
   },
 
@@ -109,8 +105,7 @@ var MessageForm = React.createClass({
         <Form
           ref="form"
           type={Message}
-          option={options}
-        />
+          option={options} />
         <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor="#99d9f4">
           <Text style={styles.buttonText}>Send</Text>
         </TouchableHighlight>
