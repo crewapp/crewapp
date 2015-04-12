@@ -6,20 +6,54 @@ dbconfig.username = process.env.username || 'root';
 dbconfig.password = process.env.password || '';
 dbconfig.hostname = process.env.hostname || 'localhost';
 
-var orm = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password, {
+var sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.password, {
   host: dbconfig.hostname
 });
 
-var Messages = orm.define('messages', {
-  message: Sequelize.TEXT,
-  name: Sequelize.STRING
+var User = sequelize.define('users', {
+  username: Sequelize.STRING,
+  password: Sequelize.STRING,
+  salt: Sequelize.STRING,
+  token: Sequelize.STRING,
+  group_id: {
+    type: Sequelize.INTEGER,
+    references: 'groups',
+    referencesKey: 'id'
+  }
 });
 
-var Groups = orm.define('groups', {
+var Message = sequelize.define('message', {
+  message: Sequelize.STRING,
+  group_id: {
+    type: Sequelize.INTEGER,
+    references: 'groups',
+    referencesKey: 'id'
+  },
+  user_id: {
+    type: Sequelize.INTEGER,
+    references: 'users',
+    referencesKey: 'id'
+  }
 });
 
-Messages.sync();
-Groups.sync();
+var Group = sequelize.define('groups', {
+  groupname: Sequelize.STRING,
+  groupkey: Sequelize.STRING
+});
 
-exports.Messages = Messages;
+
+// Group.hasMany(User);
+// User.hasMany(Message);
+// Message.belongsTo(Group);
+
+Group.sync({force: true});
+Message.sync({force: true});
+User.sync({force: true});
+
+
+
+exports.User = User;
+exports.Message = Message;
+exports.Group = Group;
+
 
