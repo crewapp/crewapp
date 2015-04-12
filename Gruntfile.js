@@ -14,6 +14,12 @@ module.exports = function(grunt) {
           'cd app', 
           'npm install'
           ].join(' && ')
+      },
+      'run-server': {
+        command: [
+          'cd server',
+          'node server.js'
+        ].join(' && ')
       }
     },
     jshint: {
@@ -41,6 +47,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['build-web', 'build-app']);
 
+  /* Run Server */
+  grunt.registerTask('run-server', ['shell:run-server']);
+  
   /* Testing */
   grunt.registerTask('test', ['jshint', 'eslint']);
 };
