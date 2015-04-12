@@ -1,4 +1,4 @@
-// var Database = require ('./database/config.js');
+// var Database = require ('./database');
 
 var router = require('express').Router();
 
