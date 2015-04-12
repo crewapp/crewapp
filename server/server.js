@@ -15,7 +15,7 @@ var parser = require('body-parser');
 var routes = require('./routes.js');
 
 //----- Require: Database Config ----//
-var database = require('./database/config.js');
+var database = require('./database');
 
 //------ Chat Server ------//
 chatApp.use(express.static(__dirname + '/../test'));
