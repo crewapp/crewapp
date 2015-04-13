@@ -1,7 +1,7 @@
 var styles = require('./styles.js');
 var React = require('react-native');
 
-var ChatRoom = require('./views/ChatRoom.js');
+var ChatRoom = require('./views/ChatRoom');
 
 var {
   AppRegistry,
