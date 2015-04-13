@@ -49,9 +49,9 @@ var Group = sequelize.define('groups', {
 // User.hasMany(Message);
 // Message.belongsTo(Group);
 
-Group.sync({force: false});
-User.sync({force: false});
-Message.sync({force: false});
+// force: true drops all tables
+// which is good for testing, and bad for production
+sequelize.sync({force: true});
 
 
 
