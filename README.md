@@ -6,3 +6,21 @@ The crew chooses you!
  - In the project directory, you should run `npm install`
  - Then make sure you have `grunt-cli`, and run `grunt build`
   - Alternatively, you can run `grunt build-web`, `grunt build-app`
+
+# Environment Variables
+
+### MySQL Database Configuration
+
+| Variables     | Node Variables       | Default Values | Description           |
+| :------------ | :------------------- | -------------: | :-------------------- |
+| database      | process.env.database | crew           | MySQL database name   |
+| username      | process.env.username | root           | MySQL username        |
+| password      | process.env.password |                | MySQL user's password |
+| hostname      | process.env.hostname | localhost      | MySQL host location   |
+
+### Node.js Server Configuration
+
+| Variables     | Node Variables       | Default Values | Description            |
+| :------------ | :------------------- | -------------: | :--------------------- |
+| PORT          | process.env.PORT     | 3000           | Port for the webserver |
+| CHATPORT      | process.env.CHATPORT | 5000           | Port for socket.io     |
