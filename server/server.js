@@ -15,14 +15,14 @@ var parser = require('body-parser');
 var routes = require('./routes.js');
 
 //----- Require: Database Config ----//
-var database = require('./database');
+var db = require('./database');
 
 //------ Chat Server ------//
 chatApp.use(express.static(__dirname + '/../test'));
 
 io.on('connection', function(socket){
   //Show 5 most recent chats to user upon login
-  database.Messages.findAll({
+  db.Message.findAll({
     limit: 5,
     order: 'createdAt DESC'
   }).success(function(data){
@@ -34,10 +34,9 @@ io.on('connection', function(socket){
 
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
-    database.Messages.create({
-      message: msg.chat,
-      name: msg.name || 'anonymous'
-    });
+    // db.Message.create({
+    //   message: msg.chat
+    // });
   });
 });
 
