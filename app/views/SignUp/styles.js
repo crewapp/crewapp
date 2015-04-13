@@ -5,11 +5,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#ffffff'
-  },
-  chatBox: {
-    borderBottomWidth: 1,
-    position: 'relative'
+    backgroundColor: '#ffffff',
   },
   formBox: {
     marginTop: 50,
@@ -34,4 +30,3 @@ var styles = StyleSheet.create({
 });
 
 module.exports = styles;
-
