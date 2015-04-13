@@ -95,7 +95,8 @@ var MessageForm = React.createClass({
   },
   send: function(message) {
     console.log('in send');
-    // Name is still being referenced here because it passes in 'anonymous' for the time being and the username after we implement authentication
+    // Name is still being referenced here because of line 9 above
+    // will be needed after we bring in authentication too.
     this.props.socket.emit('chat message', {name: name, chat: message});
   },
 
