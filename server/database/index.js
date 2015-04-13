@@ -11,7 +11,10 @@ var sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.pas
 });
 
 var User = sequelize.define('users', {
-  username: Sequelize.STRING,
+  username: {
+    type: Sequelize.STRING, 
+    unique: true
+  },
   password: Sequelize.STRING,
   salt: Sequelize.STRING,
   token: Sequelize.STRING,
@@ -46,9 +49,9 @@ var Group = sequelize.define('groups', {
 // User.hasMany(Message);
 // Message.belongsTo(Group);
 
-Group.sync({force: true});
-Message.sync({force: true});
-User.sync({force: true});
+Group.sync({force: false});
+User.sync({force: false});
+Message.sync({force: false});
 
 
 
