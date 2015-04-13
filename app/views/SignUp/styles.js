@@ -5,7 +5,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff'
   },
   formBox: {
     marginTop: 50,

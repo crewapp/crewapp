@@ -9,16 +9,13 @@ var ChatRoom = require('../ChatRoom');
 var {
   Text,
   View,
-  Image,
-  TouchableHighlight,
-  NavigatorIOS
+  TouchableHighlight
 } = React;
 
 var LoginFields = t.struct({
   username: t.Str,
-  password: t.Str,
-
-})
+  password: t.Str
+});
 
 var options = {
   fields: {
@@ -30,20 +27,20 @@ var options = {
       password: true,
       secureTextEntry: true,
       placeholder: 'Enter your password',
-      error: 'You have to enter your password!',
+      error: 'You have to enter your password!'
     }
   }
-}
+};
 
 var SignUp = React.createClass({
   onPress: function() {
     this.props.navigator.push({
       title: 'Chat Room',
       component: ChatRoom
-    })
+    });
   },
-  send: function(vaule){
-    console.log(this.props.navigatorIOS);
+  propTypes: {
+    navigator: React.PropTypes.any
   },
   render: function() {
     return (
@@ -58,8 +55,8 @@ var SignUp = React.createClass({
           </TouchableHighlight>
         </View>
       </View>
-    )
+    );
   }
-})
+});
 
 module.exports = SignUp;
