@@ -15,16 +15,16 @@ var {
 } = React;
 
 var LoginFields = t.struct({
-  email: t.Str,
+  username: t.Str,
   password: t.Str,
 
 })
 
 var options = {
   fields: {
-    email: {
-      placeholder: 'Your email address',
-      error: 'You have to enter your email address!'
+    username: {
+      placeholder: 'Your username',
+      error: 'You have to enter a username!'
     },
     password: {
       password: true,
