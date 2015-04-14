@@ -21,16 +21,22 @@ var db = require('./database');
 //------ Chat Server ------//
 chatApp.use(express.static(__dirname + '/../test'));
 
-var rooms = [{name: 'room Blue-Penguin', count: 0}];
+var rooms = [{name: 'Blue-Penguin', count: 0},
+             {name: 'Red-Crawfish', count: 0},
+             {name: 'Yellow-tail', count: 0},
+             {name: 'Orange-monkey', count: 0}
+            ];
 
 chatRouter.get('/rooms', function(req, res){
-  res.end(rooms[0].name);
+  res.end(rooms[Math.floor(Math.random() * rooms.length)].name);
 });
 
 chatApp.use('/api', chatRouter);
 
-io.sockets.on('connection', function(socket) {
+chatServer.listen(process.env.CHATPORT || 5000);
 
+//------- Socket Server --------//
+io.sockets.on('connection', function(socket) {
   socket.on('join room', function(room) {
     socket.room = room;
     socket.join(room);
@@ -40,16 +46,13 @@ io.sockets.on('connection', function(socket) {
     console.log(err);
   });
 
-  socket.on('message', function(data) {
-    io.sockets.in(socket.room).emit('message', data);
+  socket.on('message', function(chat) {
+    io.sockets.in(socket.room).emit('message', chat);
   });
   
 });
 
-chatServer.listen(process.env.CHATPORT || 5000);
-
 //------ Our App Server ------//
-
 app.use(express.static(__dirname + '/../client'));
 
 // 2 for dev, 0 for production
