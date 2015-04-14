@@ -20,19 +20,19 @@ var LoginFields = t.struct({
 var options = {
   fields: {
     username: {
-      placeholder: 'Choose a username',
-      error: 'You have to enter a username!'
+      placeholder: 'Your username',
+      error: 'You have to enter your username!'
     },
     password: {
       password: true,
       secureTextEntry: true,
-      placeholder: 'Choose a password',
+      placeholder: 'Enter your password',
       error: 'You have to enter your password!'
     }
   }
 };
 
-var SignUp = React.createClass({
+var Login = React.createClass({
   onPress: function() {
     this.props.navigator.push({
       title: 'Chat Room',
@@ -51,7 +51,7 @@ var SignUp = React.createClass({
             type={LoginFields}
             options={options} />
           <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor="#99d9f4">
-            <Text style={styles.buttonText}>Create Account</Text>
+            <Text style={styles.buttonText}>Log In</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -59,4 +59,4 @@ var SignUp = React.createClass({
   }
 });
 
-module.exports = SignUp;
+module.exports = Login;

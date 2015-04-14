@@ -1,8 +1,7 @@
 var styles = require('./styles.js');
 var React = require('react-native');
 
-// var ChatRoom = require('./views/ChatRoom');
-var SignUp = require('./views/SignUp');
+var SplashPage = require('./views/SplashPage');
 
 var {
   AppRegistry,
@@ -17,8 +16,8 @@ var app = React.createClass({
         style={styles.container}
         tintColor="#FF6600"
         initialRoute={{
-          title: 'Sign Up',
-          component: SignUp
+          title: 'Crew App',
+          component: SplashPage
         }} />
     );
   }
