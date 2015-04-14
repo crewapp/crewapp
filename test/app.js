@@ -17,9 +17,9 @@ $(document).ready(function() {
       socket.emit('join room', room);
     });
 
-    socket.on('message', function(msg){
-      console.log('Message: ' + msg);
-      $('#messages').append('<li>anonymous: '+msg+'</li>');
+    socket.on('message', function(chat){
+      console.log('Message: ' + chat);
+      $('#messages').append('<li>anonymous: '+chat+'</li>');
     });
 
     $('form').submit(function(){
