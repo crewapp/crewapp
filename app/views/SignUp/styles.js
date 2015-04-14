@@ -7,10 +7,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ffffff'
   },
-  chatBox: {
-    borderBottomWidth: 1,
-    position: 'relative'
-  },
   formBox: {
     marginTop: 50,
     padding: 20,

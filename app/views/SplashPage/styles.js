@@ -7,10 +7,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ffffff'
   },
-  chatBox: {
-    borderBottomWidth: 1,
-    position: 'relative'
-  },
   formBox: {
     marginTop: 50,
     padding: 20,
@@ -28,8 +24,18 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
+    alignSelf: 'flex-start',
+    justifyContent: 'space-between'
+  },
+  grayButton: {
+    height: 36,
+    backgroundColor: '#CCCCCC',
+    borderColor: '#CCCCCC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
     alignSelf: 'flex-end',
-    justifyContent: 'center'
+    justifyContent: 'space-between'
   }
 });
 
