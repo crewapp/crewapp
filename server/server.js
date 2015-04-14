@@ -45,6 +45,9 @@ chatServer.listen(process.env.CHATPORT || 5000);
 //------ Our App Server ------//
 app.use(express.static(__dirname + '/../client'));
 
+// 2 for dev, 0 for production
+app.set('json spaces', 2);
+
 // Set up our body parser for query strings
 app.use(parser.urlencoded({ extended: false }));
 
