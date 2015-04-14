@@ -1,12 +1,12 @@
 'use strict';
 
-$(document).ready(function() {
+$(function() {
 
   var socket = io();
   var room;
 
   $.ajax({
-    url:"http://localhost:5000/api/rooms",
+    url:'http://localhost:5000/api/rooms',
     success: function(data) {
       console.log(data);
       $('#header').html(data);

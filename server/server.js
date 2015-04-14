@@ -15,9 +15,6 @@ var app = express();
 var parser = require('body-parser');
 var routes = require('./routes.js');
 
-//----- Require: Database Config ----//
-var db = require('./database');
-
 //------ Chat Server ------//
 chatApp.use(express.static(__dirname + '/../test'));
 
