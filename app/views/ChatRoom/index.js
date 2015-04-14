@@ -85,7 +85,6 @@ var ChatList = React.createClass({
 var MessageForm = React.createClass({
   onPress: function() {
     var value = this.refs.form.getValue();
-    console.log('inside onPress -> value !');
     if (value) {
       this.send(value);
     }
