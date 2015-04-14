@@ -30,15 +30,28 @@ var options = {
 
 var ChatRoom = React.createClass({
   getInitialState: function() {
-    return {io: io('http://localhost:5000', {jsonp: false})};
+    return {
+      io: io('http://localhost:5000', {jsonp: false}),
+      room: null
+    };
   },
 
   componentDidMount: function() {
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
+    fetch('http://localhost:5000/api/rooms')
+      .then((response) => {
+        //TODO: Set this.state.room to response._bodyText
+        this.setState({room: response._bodyText});
+        //TODO: Emit join room and the room name to join room via server
+        io.emit('join room', this.state.room);
+        //Q: Do I need to add forceUpdate here? Rationale: Once we update props do we need to re-render all components?
+      })
   },
 
   render: function() {
     return (
+      //TODO: Add attribute to ChatList so that chatlistt knows what room to listen for
+      //TODO: Add attribute to MessageForm 
       <View style={styles.container}>
         <View style={styles.chatBox}>
           <ChatList socket={this.state.io} />
