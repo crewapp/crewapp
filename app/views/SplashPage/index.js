@@ -36,8 +36,8 @@ var SplashPage = React.createClass({
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableHighlight>
       </View>
-    )
+    );
   }
-})
+});
 
 module.exports = SplashPage;
