@@ -30,6 +30,14 @@ form button {
   padding: 10px;
 }
 
+#header {
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+}
+
 #messages {
   list-style-type: none;
   margin: 0;
