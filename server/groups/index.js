@@ -2,15 +2,16 @@
 var router = require('express').Router();
 
 router.post('/', function(req, res){
+  var username = req.body.username;
   var token = req.body.token;
   var response;
 
-  if(token === undefined){
+  if(token === undefined || username === undefined){
     response = {
       response: 'failed',
       status: 'credentials not supplied'
     };
-  }else if(token === '1010'){
+  }else if(token === '1010' && username === 'test'){
     response = {
       response: 'success',
       group: 'crying panda'
@@ -25,15 +26,16 @@ router.post('/', function(req, res){
 });
 
 router.post('/leave', function(req, res){
+  var username = req.body.username;
   var token = req.body.token;
   var response;
 
-  if(token === undefined){
+  if(token === undefined || username === undefined){
     response = {
       response: 'failed',
       status: 'credentials not supplied'
     };
-  }else if(token === '1010'){
+  }else if(token === '1010' && username === 'test'){
     response = {
       response: 'success',
       group: null
@@ -48,15 +50,16 @@ router.post('/leave', function(req, res){
 });
 
 router.post('/join', function(req, res){
+  var username = req.body.username;
   var token = req.body.token;
   var response;
 
-  if(token === undefined){
+  if(token === undefined || username === undefined){
     response = {
       response: 'failed',
       status: 'credentials not supplied'
     };
-  }else if(token === '1010'){
+  }else if(token === '1010' && username === 'test'){
     response = {
       response: 'success',
       group: 'dying turtle'
@@ -70,4 +73,42 @@ router.post('/join', function(req, res){
   res.json(response);
 });
 
+router.post('/messages', function(req, res){
+  var username = req.body.username;
+  var token = req.body.token;
+  var response;
+
+  if(token === undefined || username === undefined){
+    response = {
+      response: 'failed',
+      status: 'credentials not supplied'
+    };
+  }else if(token === '1010' && username === 'test'){
+    // pull only info from user group
+    response = {
+      response: 'success',
+      group: 'dying turtle',
+      messages: [
+        {
+          'username': 'arian',
+          'message': 'hello guys'
+        },
+        {
+          'username': 'poppin3000',
+          'message': 'i love you guys'
+        },
+        {
+          'username': 'rkho',
+          'message': 'testing!!'
+        }
+      ]
+    };
+  }else{
+    response = {
+      response: 'failed',
+      status: 'invalid credentials'
+    };
+  }
+  res.json(response);
+});
 module.exports = router;
