@@ -16,8 +16,10 @@ var User = sequelize.define('users', {
     unique: true
   },
   password: Sequelize.STRING,
-  salt: Sequelize.STRING,
-  token: Sequelize.STRING,
+  token: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   group_id: {
     type: Sequelize.INTEGER,
     references: 'groups',
