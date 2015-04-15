@@ -8,6 +8,8 @@ var io = require('react-native-sockets-io');
 
 var name = name || 'anonymous';
 
+var request = new XMLHttpRequest();
+
 var {
   Text,
   View,
@@ -38,20 +40,39 @@ var ChatRoom = React.createClass({
 
   componentDidMount: function() {
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
-    fetch('http://localhost:5000/api/rooms')
-      .then((response) => {
-        //TODO: Set this.state.room to response._bodyText
-        this.setState({room: response._bodyText});
-        //TODO: Emit join room and the room name to join room via server
-        io.emit('join room', this.state.room);
-        //Q: Do I need to add forceUpdate here? Rationale: Once we update props do we need to re-render all components?
-      })
+    this.getRoom();
+  },
+
+  getRoom: function() {
+
+    request.onreadystatechange = (e) => {
+      
+      if (request.readyState !== 4) {
+        return;
+      }
+
+      if (request.status === 200) {
+        
+        this.setState({room: request.responseText});
+        var that = this;
+        this.state.io.on('connect', function() {
+          that.state.io.emit('join room', that.state.room);
+        });
+        console.log(this.state.room);
+        this.forceUpdate();
+
+      } else {
+        console.warn('error');
+      }
+    };
+
+    request.open('GET', 'http://localhost:5000/api/rooms');
+    request.send();
+
   },
 
   render: function() {
     return (
-      //TODO: Add attribute to ChatList so that chatlistt knows what room to listen for
-      //TODO: Add attribute to MessageForm 
       <View style={styles.container}>
         <View style={styles.chatBox}>
           <ChatList socket={this.state.io} />
@@ -75,7 +96,7 @@ var ChatList = React.createClass({
   componentDidMount: function(){
   //Must specifiy 'jsonp: false' since react native doesn't provide the dom
   //and thus wouldn't support creating an iframe/script tag
-    this.props.socket.on('chat message', (msg) =>{
+    this.props.socket.on('message', (msg) =>{
       this.state.messages.push(msg);
       this.forceUpdate();
     });
@@ -106,10 +127,9 @@ var MessageForm = React.createClass({
     socket: React.PropTypes.any
   },
   send: function(message) {
-    console.log('in send');
     // Name is still being referenced here because of line 9 above
     // will be needed after we bring in authentication too.
-    this.props.socket.emit('chat message', {name: name, chat: message});
+    this.props.socket.emit('message', message);
   },
 
   render: function() {
