@@ -24,8 +24,7 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
-    alignSelf: 'flex-start',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   },
   grayButton: {
     height: 36,
@@ -34,8 +33,7 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
-    alignSelf: 'flex-end',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   }
 });
 
