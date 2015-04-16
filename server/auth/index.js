@@ -2,7 +2,9 @@
 var router = require('express').Router();
 var db = require('../database');
 var bcrypt = require('bcrypt-nodejs');
+var bluebird = require('bluebird');
 var helper = require('./../helper');
+bluebird.promisifyAll(bcrypt);
 
 router.post('/signup', function(req, res){
   var username = req.body.username;
@@ -19,18 +21,28 @@ router.post('/signup', function(req, res){
         });
       }else if(dbUser === null){
 
-        bcrypt.hash(password, null, null, function(err, hash) {
-          if(err){
-            console.error(err);
-          }
+        bcrypt.hash(password, null, null, function(hash) {
+
           helper.genToken(function(token){
+
             db.User
               .create({username: username, password: hash, token: token})
               .then(function(user){
-                res.json({
-                  response: 'success',
-                  token: user.token,
-                  group: 'crying panda'
+
+                helper.findGroup(user, function(group){
+
+                  db.GroupHistory.create({user_id: user.id, group_id: group.id})
+                    .then(function(){
+
+                      user.update({group_id: group.id}).then(function(){
+                        res.json({
+                          response: 'success',
+                          token: user.token,
+                          group: group.groupname
+                        });
+                      });
+
+                    });
                 });
               });
           });
