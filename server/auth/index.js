@@ -19,7 +19,7 @@ router.post('/signup', function(req, res){
         });
       }else if(dbUser === null){
 
-        bcrypt.hash(password, null, null, function(hash) {
+        bcrypt.hash(password, null, null, function(err, hash) {
 
           helper.genToken(function(token){
 
