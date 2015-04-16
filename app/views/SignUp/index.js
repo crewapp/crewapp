@@ -81,7 +81,7 @@ var SignUp = React.createClass({
   navigateTo: function() {
     var obj = {username: this.state.username,
                   token: this.state.token,
-                  group: this.state.group}
+                  group: this.state.group};
     this.props.navigator.push({
       title: 'Chat Room',
       component: ChatRoom,
