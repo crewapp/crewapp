@@ -61,7 +61,7 @@ var SignUp = React.createClass({
             'This username is already taken'
           );
         } else {
-          this.setState({token: res.token, group: res.group});
+          this.setState({password: null, token: res.token, group: res.group});
           this.navigateTo();
         }
 
@@ -79,10 +79,13 @@ var SignUp = React.createClass({
     this.checkValidity();
   },
   navigateTo: function() {
+    var obj = {username: this.state.username,
+                  token: this.state.token,
+                  group: this.state.group}
     this.props.navigator.push({
       title: 'Chat Room',
       component: ChatRoom,
-      passProps: this.state
+      passProps: obj
     });
   },
   propTypes: {
