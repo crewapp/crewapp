@@ -20,6 +20,17 @@ module.exports = function(grunt) {
           'cd server',
           'node server.js'
         ].join(' && ')
+      },
+      'open-app': {
+        command: [
+          'cd app',
+          'open app.xcodeproj'
+        ].join(' && ')
+      },
+      'mysql-start': {
+        command: [
+          'mysql.server start'
+        ].join(' && ')
       }
     },
     jshint: {
@@ -49,6 +60,9 @@ module.exports = function(grunt) {
 
   /* Run Server */
   grunt.registerTask('run-server', ['shell:run-server']);
+
+  /* Open iOS app */
+  grunt.registerTask('app', ['shell:mysql-start','shell:open-app', 'run-server']);
   
   /* Testing */
   grunt.registerTask('test', ['jshint', 'eslint']);
