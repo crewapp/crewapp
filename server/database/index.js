@@ -12,7 +12,7 @@ var sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.pas
 
 var User = sequelize.define('users', {
   username: {
-    type: Sequelize.STRING, 
+    type: Sequelize.STRING,
     unique: true
   },
   password: Sequelize.STRING,
@@ -42,10 +42,25 @@ var Message = sequelize.define('message', {
 });
 
 var Group = sequelize.define('groups', {
-  groupname: Sequelize.STRING,
+  groupname: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   groupkey: Sequelize.STRING
 });
 
+var GroupHistory = sequelize.define('group_history', {
+  group_id: {
+    type: Sequelize.INTEGER,
+    references: 'groups',
+    referencesKey: 'id'
+  },
+  user_id: {
+    type: Sequelize.INTEGER,
+    references: 'users',
+    referencesKey: 'id'
+  }
+});
 
 // Group.hasMany(User);
 // User.hasMany(Message);
@@ -56,9 +71,10 @@ var Group = sequelize.define('groups', {
 sequelize.sync({force: true});
 
 
-
+exports.Sequelize = Sequelize;
 exports.User = User;
 exports.Message = Message;
 exports.Group = Group;
+exports.GroupHistory = GroupHistory;
 
 
