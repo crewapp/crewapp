@@ -2,9 +2,7 @@
 var router = require('express').Router();
 var db = require('../database');
 var bcrypt = require('bcrypt-nodejs');
-var bluebird = require('bluebird');
 var helper = require('./../helper');
-bluebird.promisifyAll(bcrypt);
 
 router.post('/signup', function(req, res){
   var username = req.body.username;
