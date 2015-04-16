@@ -49,12 +49,10 @@ var findGroup = function(dbUser, cb){
         cb(group);
       });
     }else{
-      var found = false;
       var current_id = null;
 
       var grouper = function(group_result){
         if(group_result === null){
-          found = true;
           db.Group.find({where: {id: result[current_id].group_id}})
             .then(function(group){
               cb(group);
