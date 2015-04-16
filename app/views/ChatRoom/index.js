@@ -8,7 +8,7 @@ var io = require('react-native-sockets-io');
 
 var name = name || 'anonymous';
 
-var request = new XMLHttpRequest();
+// var request = new XMLHttpRequest();
 
 var {
   Text,
@@ -45,30 +45,33 @@ var ChatRoom = React.createClass({
 
   getRoom: function() {
 
-    request.onreadystatechange = (e) => {
-      
-      if (request.readyState !== 4) {
-        return;
-      }
-
-      if (request.status === 200) {
-        
-        this.setState({room: request.responseText});
-        var that = this;
-        this.state.io.on('connect', function() {
-          that.state.io.emit('join room', that.state.room);
+    fetch('http://localhost:5000/api/rooms')
+      .then((response) => response.text())
+        .then((responseText) => {
+          console.log(responseText);
+        })
+        .catch((error) => {
+          console.warn(error);
         });
-        console.log(this.state.room);
-        this.forceUpdate();
 
-      } else {
-        console.warn('error');
-      }
-    };
-
-    request.open('GET', 'http://localhost:5000/api/rooms');
-    request.send();
-
+    // request.onreadystatechange = (e) => {
+    //   if (request.readyState !== 4) {
+    //     return;
+    //   }
+    //   if (request.status === 200) {
+    //     this.setState({room: request.responseText});
+    //     var that = this;
+    //     this.state.io.on('connect', function() {
+    //       that.state.io.emit('join room', that.state.room);
+    //     });
+    //     console.log(this.state.room);
+    //     this.forceUpdate();
+    //   } else {
+    //     console.warn('error');
+    //   }
+    // };
+    // request.open('GET', 'http://localhost:5000/api/rooms');
+    // request.send(); 
   },
 
   render: function() {
@@ -106,7 +109,7 @@ var ChatList = React.createClass({
       <View>
         {
           this.state.messages.map(m => {
-            return <Text>{m.name}: {m.chat}</Text>;
+            return <Text key={m.id}>{name}: {m}</Text>;
           })
         }
       </View>
