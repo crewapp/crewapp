@@ -4,6 +4,8 @@ var React = require('react-native');
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
+Form.stylesheet = require('./../bootstrap.js');
+
 var ChatRoom = require('../ChatRoom');
 
 var {
@@ -57,10 +59,13 @@ var SignUp = React.createClass({
         var res = JSON.parse(request.responseText);
         console.log(typeof request.responseText);
 
+        console.log('res', res.status);
         if (res.status === 'user exists') {
           AlertIOS.alert(
             'This username is already taken'
           );
+        } else if (res.status === 'credentials not supplied'){
+          AlertIOS.alert('Nothing was provided!');
         } else {
           this.setState({password: null, token: res.token, group: res.group});
           this.navigateTo();
@@ -75,9 +80,21 @@ var SignUp = React.createClass({
     request.send(str);
   },
   onPress: function() {
-    this.setState({username: this.refs.form.getValue().username,
-      password: this.refs.form.getValue().password});
-    this.checkValidity();
+
+    // var username = '';
+    // var password = '';
+    //   username = ;
+    //   password = ;
+    // }
+
+    if(this.refs.form.getValue()){
+      this.setState({
+        username: this.refs.form.getValue().username,
+        password: this.refs.form.getValue().password
+      });
+      this.checkValidity();
+    }
+
   },
   navigateTo: function() {
     var obj = {username: this.state.username,
