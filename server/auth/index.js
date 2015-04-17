@@ -77,11 +77,21 @@ router.post('/signin', function(req, res){
         bcrypt.compare(password, dbUser.password, function(err, valid) {
           if(valid === true){
             helper.genToken(function(newToken){
-              dbUser.update({token: newToken}).then(function(){
-                res.json({
-                  response: 'success',
-                  token: newToken,
-                  group: 'crying panda'
+              dbUser.update({token: newToken}).then(function(updatedUser){
+                db.Group.find({
+                  where: {
+                    id: updatedUser.group_id
+                  }
+                }).then(function(group){
+                  var groupname = null;
+                  if(group !== null){
+                    groupname = group.groupname;
+                  }
+                  res.json({
+                    response: 'success',
+                    token: newToken,
+                    group: groupname
+                  });
                 });
               });
             });
