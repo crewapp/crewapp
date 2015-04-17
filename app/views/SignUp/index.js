@@ -55,6 +55,7 @@ var SignUp = React.createClass({
 
       if (request.status === 200) {
         var res = JSON.parse(request.responseText);
+        console.log(typeof request.responseText);
 
         if (res.status === 'user exists') {
           AlertIOS.alert(

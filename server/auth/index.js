@@ -20,17 +20,27 @@ router.post('/signup', function(req, res){
       }else if(dbUser === null){
 
         bcrypt.hash(password, null, null, function(err, hash) {
-          if(err){
-            console.error(err);
-          }
+
           helper.genToken(function(token){
+
             db.User
               .create({username: username, password: hash, token: token})
               .then(function(user){
-                res.json({
-                  response: 'success',
-                  token: user.token,
-                  group: 'crying panda'
+
+                helper.findGroup(user, function(group){
+
+                  db.GroupHistory.create({user_id: user.id, group_id: group.id})
+                    .then(function(){
+
+                      user.update({group_id: group.id}).then(function(){
+                        res.json({
+                          response: 'success',
+                          token: user.token,
+                          group: group.groupname
+                        });
+                      });
+
+                    });
                 });
               });
           });
@@ -67,11 +77,21 @@ router.post('/signin', function(req, res){
         bcrypt.compare(password, dbUser.password, function(err, valid) {
           if(valid === true){
             helper.genToken(function(newToken){
-              dbUser.update({token: newToken}).then(function(){
-                res.json({
-                  response: 'success',
-                  token: newToken,
-                  group: 'crying panda'
+              dbUser.update({token: newToken}).then(function(updatedUser){
+                db.Group.find({
+                  where: {
+                    id: updatedUser.group_id
+                  }
+                }).then(function(group){
+                  var groupname = null;
+                  if(group !== null){
+                    groupname = group.groupname;
+                  }
+                  res.json({
+                    response: 'success',
+                    token: newToken,
+                    group: groupname
+                  });
                 });
               });
             });

@@ -30,11 +30,33 @@ var options = {
 
 var ChatRoom = React.createClass({
   getInitialState: function() {
-    return {io: io('http://localhost:5000', {jsonp: false})};
+    return {
+      io: io('http://localhost:5000', {jsonp: false}),
+      room: 'lobby'
+    };
   },
 
   componentDidMount: function() {
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
+    this.getRoom();
+  },
+
+  getRoom: function() {
+    fetch('http://localhost:5000/api/rooms')
+      .then((response) => response.text())
+        .then((responseText) => {
+          this.setState({room: responseText});
+          console.log(this.state.room);
+          var that = this;
+          this.state.io.on('connect', function() {
+            that.state.io.emit('join room', that.state.room);
+            that.state.io.emit('message', 'You\'ve joined: ' + that.state.room);
+          });
+          this.forceUpdate();
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
   },
 
   render: function() {
@@ -62,7 +84,7 @@ var ChatList = React.createClass({
   componentDidMount: function(){
   //Must specifiy 'jsonp: false' since react native doesn't provide the dom
   //and thus wouldn't support creating an iframe/script tag
-    this.props.socket.on('chat message', (msg) =>{
+    this.props.socket.on('message', (msg) =>{
       this.state.messages.push(msg);
       this.forceUpdate();
     });
@@ -72,7 +94,7 @@ var ChatList = React.createClass({
       <View>
         {
           this.state.messages.map(m => {
-            return <Text>{m.name}: {m.chat}</Text>;
+            return <Text key={m.id}>{name}: {m}</Text>;
           })
         }
       </View>
@@ -93,10 +115,9 @@ var MessageForm = React.createClass({
     socket: React.PropTypes.any
   },
   send: function(message) {
-    console.log('in send');
     // Name is still being referenced here because of line 9 above
     // will be needed after we bring in authentication too.
-    this.props.socket.emit('chat message', {name: name, chat: message});
+    this.props.socket.emit('message', message);
   },
 
   render: function() {
