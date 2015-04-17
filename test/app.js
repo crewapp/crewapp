@@ -18,7 +18,7 @@ $(function() {
     });
     socket.on('message', function(chat){
       console.log('Message: ' + chat);
-      $('#messages').append('<li>anonymous: '+chat+'</li>');
+      $('#messages').append('<li>anonymous: '+chat.message+'</li>');
     });
 
     $('form').submit(function(){
