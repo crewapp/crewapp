@@ -18,6 +18,12 @@ var routes = require('./routes.js');
 //------ Chat Server ------//
 chatApp.use(express.static(__dirname + '/../test'));
 
+chatApp.all('/', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
+
 var rooms = [{name: 'Blue-Penguin', count: 0},
              {name: 'Red-Crawfish', count: 0},
              {name: 'Yellow-tail', count: 0},
@@ -37,6 +43,7 @@ io.sockets.on('connection', function(socket) {
   socket.on('join room', function(room) {
     socket.room = room;
     socket.join(room);
+    console.log(room);
   });
 
   socket.on('error', function(err) {
