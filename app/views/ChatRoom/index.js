@@ -32,7 +32,7 @@ var options = {
 var ChatRoom = React.createClass({
   getInitialState: function() {
     return {
-      io: io('http://localhost:5000', {jsonp: false}),
+      io: io('http://chat.trycrewapp.com', {jsonp: false}),
       room: 'lobby'
     };
   },
@@ -43,7 +43,7 @@ var ChatRoom = React.createClass({
   },
 
   getRoom: function() {
-    fetch('http://localhost:5000/api/rooms')
+    fetch('http://chat.trycrewapp.com/api/rooms')
       .then((response) => response.text())
         .then((responseText) => {
           this.setState({room: responseText});

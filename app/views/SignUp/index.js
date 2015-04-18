@@ -76,16 +76,10 @@ var SignUp = React.createClass({
       }
     };
 
-    request.open('POST', 'http://localhost:3000/api/auth/signup');
+    request.open('POST', 'http://trycrewapp.com/api/auth/signup');
     request.send(str);
   },
   onPress: function() {
-
-    // var username = '';
-    // var password = '';
-    //   username = ;
-    //   password = ;
-    // }
 
     if(this.refs.form.getValue()){
       this.setState({
