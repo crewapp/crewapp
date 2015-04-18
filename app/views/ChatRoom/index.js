@@ -47,7 +47,7 @@ var ChatRoom = React.createClass({
   getRoom: function() {
     var that = this;
     this.state.io.on('connect', function() {
-      that.state.io.emit('join room', 'room rawr');
+      that.state.io.emit('join room', that.state.room);
       that.state.io.emit('message', 'You\'ve joined: ' + that.state.room);
     });
   },
