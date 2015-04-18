@@ -31,7 +31,7 @@ var styles = StyleSheet.create({
     flex: 3
   },
   horizontalScrollView: {
-    height: 120,
+    height: 120
   }
 });
 
