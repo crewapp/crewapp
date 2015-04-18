@@ -36,7 +36,9 @@ var ChatRoom = React.createClass({
       room: this.props.group
     };
   },
-
+  propTypes: {
+    group: React.PropTypes.any
+  },
   componentDidMount: function() {
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
     this.getRoom();
