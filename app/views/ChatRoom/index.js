@@ -11,7 +11,8 @@ var name = name || 'anonymous';
 var {
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } = React;
 
 var Message = t.struct({
@@ -62,12 +63,8 @@ var ChatRoom = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <View style={styles.chatBox}>
-          <ChatList socket={this.state.io} />
-        </View>
-        <View style={styles.formBox}>
-          <MessageForm socket={this.state.io} />
-        </View>
+        <ChatList socket={this.state.io} />
+        <MessageForm socket={this.state.io} />
       </View>
     );
   }
@@ -91,13 +88,17 @@ var ChatList = React.createClass({
   },
   render: function(){
     return (
-      <View>
+      <ScrollView
+        onScroll={() => { console.log('onScroll!'); }}
+        scrollEventThrottle={200}
+        contentInset={{top: -50}}
+        style={styles.scrollView}>
         {
           this.state.messages.map(m => {
             return <Text key={m.id}>{name}: {m}</Text>;
           })
         }
-      </View>
+      </ScrollView>
     );
   }
 });

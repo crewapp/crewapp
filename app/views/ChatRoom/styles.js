@@ -3,18 +3,12 @@ var { StyleSheet } = React;
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#ffffff'
   },
-  chatBox: {
-    borderBottomWidth: 1,
-    position: 'relative'
-  },
   formBox: {
-    marginTop: 50,
-    padding: 20,
-    position: 'relative'
+    flex: 1
   },
   buttonText: {
     fontSize: 18,
@@ -30,6 +24,14 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'flex-end',
     justifyContent: 'center'
+  },
+  scrollView: {
+    backgroundColor: '#6A85B1',
+    height: 300,
+    flex: 3
+  },
+  horizontalScrollView: {
+    height: 120
   }
 });
 
