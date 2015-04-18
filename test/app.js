@@ -6,7 +6,7 @@ $(function() {
   var room;
 
   $.ajax({
-    url:'http://localhost:5000/api/rooms',
+    url:'http://chat.trycrewapp.com/api/rooms',
     success: function(data) {
       console.log(data);
       $('#header').html(data);
