@@ -72,7 +72,7 @@ var Login = React.createClass({
       }
     };
 
-    request.open('POST', 'http://localhost:3000/api/auth/signin');
+    request.open('POST', 'http://trycrewapp.com/api/auth/signin');
     request.send(str);
   },
   onPress: function() {
