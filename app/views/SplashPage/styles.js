@@ -18,20 +18,19 @@ var styles = StyleSheet.create({
     alignSelf: 'center'
   },
   button: {
-    height: 36,
+    height: 90,
     backgroundColor: '#48BBEC',
     borderColor: '#48BBEC',
     borderWidth: 1,
-    borderRadius: 8,
+    marginTop: 400,
     marginBottom: 10,
     justifyContent: 'center'
   },
   grayButton: {
-    height: 36,
+    height: 90,
     backgroundColor: '#CCCCCC',
     borderColor: '#CCCCCC',
     borderWidth: 1,
-    borderRadius: 8,
     marginBottom: 10,
     justifyContent: 'center'
   }

@@ -3,7 +3,7 @@ var React = require('react-native');
 
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
-
+Form.stylesheet = require('./../bootstrap.js');
 var ChatRoom = require('../ChatRoom');
 
 var {
