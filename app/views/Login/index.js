@@ -76,9 +76,13 @@ var Login = React.createClass({
     request.send(str);
   },
   onPress: function() {
-    this.setState({username: this.refs.form.getValue().username,
-      password: this.refs.form.getValue().password});
-    this.checkValidity();
+    if(this.refs.form.getValue()){
+      this.setState({
+        username: this.refs.form.getValue().username,
+        password: this.refs.form.getValue().password
+      });
+      this.checkValidity();
+    }
   },
   navigateTo: function() {
     var obj = {username: this.state.username,
