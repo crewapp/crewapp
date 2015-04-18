@@ -33,31 +33,23 @@ var ChatRoom = React.createClass({
   getInitialState: function() {
     return {
       io: io('http://chat.trycrewapp.com', {jsonp: false}),
-      room: 'lobby'
+      room: this.props.group
     };
   },
-
+  propTypes: {
+    group: React.PropTypes.any
+  },
   componentDidMount: function() {
     this.state.io.emit('chat message', {name: name, chat: 'hello'});
     this.getRoom();
   },
 
   getRoom: function() {
-    fetch('http://chat.trycrewapp.com/api/rooms')
-      .then((response) => response.text())
-        .then((responseText) => {
-          this.setState({room: responseText});
-          console.log(this.state.room);
-          var that = this;
-          this.state.io.on('connect', function() {
-            that.state.io.emit('join room', that.state.room);
-            that.state.io.emit('message', 'You\'ve joined: ' + that.state.room);
-          });
-          this.forceUpdate();
-        })
-        .catch((error) => {
-          console.warn(error);
-        });
+    var that = this;
+    this.state.io.on('connect', function() {
+      that.state.io.emit('join room', that.state.room);
+      that.state.io.emit('message', 'You\'ve joined: ' + that.state.room);
+    });
   },
 
   render: function() {
@@ -89,9 +81,9 @@ var ChatList = React.createClass({
   render: function(){
     return (
       <ScrollView
-        onScroll={() => { console.log('onScroll!'); }}
+        // onScroll={() => { console.log('onScroll!'); }}
         scrollEventThrottle={200}
-        contentInset={{top: -50}}
+        contentInset={{top: 0}}
         style={styles.scrollView}>
         {
           this.state.messages.map(m => {
