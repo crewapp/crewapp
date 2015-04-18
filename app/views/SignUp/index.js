@@ -81,12 +81,6 @@ var SignUp = React.createClass({
   },
   onPress: function() {
 
-    // var username = '';
-    // var password = '';
-    //   username = ;
-    //   password = ;
-    // }
-
     if(this.refs.form.getValue()){
       this.setState({
         username: this.refs.form.getValue().username,
