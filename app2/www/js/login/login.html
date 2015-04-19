@@ -1,11 +1,11 @@
 <ion-view hide-nav-bar="true">
   <ion-content class="bg-form-login" scroll="false">
   <a href="#/" class="nav-back"></a>
-  <form ng-submit="submit($event)">
-    <input type="text" ng-model="username" class="form-username" placeholder="username" />
-    <input type="password" ng-model="password" class="form-password" placeholder="password" />
+  <form ng-submit="login($event)">
+    <input type="text" ng-model="form.user" class="form-username" placeholder="username" />
+    <input type="password" ng-model="form.pass" class="form-password" placeholder="password" />
 
-    <a class="form-submit" ng-click="submit($event)">Login</a>
+    <a class="form-submit" ng-click="login($event)">Login</a>
   </form>
   </ion-content>
 </ion-view>

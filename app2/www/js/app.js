@@ -10,6 +10,7 @@ angular.module('crewapp', [
   'crewapp.signup',
   'crewapp.login',
   'crewapp.question',
+  'crewapp.services',
   'crewapp.splash2'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
