@@ -1,1 +1,131 @@
 /* Empty. Add your own CSS if you like */
+
+.bg-splash {
+  background-image: -webkit-image-set(
+    url('../img/Splash.png') 1x,
+    url('../img/Splash@2x.png') 2x,
+    url('../img/Splash@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
+.bg-question {
+  background-image: -webkit-image-set(
+    url('../img/questions.png') 1x,
+    url('../img/questions@2x.png') 2x,
+    url('../img/questions@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
+.btn-splash {
+  position: absolute;
+  display: inline-block;
+  padding: 2px 8px;
+  width: 325px;
+  height: 50px;
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  font-family: "Avenir Next";
+  line-height: 50px;
+  text-align: center;
+  appearance: button;
+  text-decoration: none;
+  display: inline-block;
+  padding: 2px 8px;
+}
+
+.fb {
+  left: 45px;
+  top: 553px;
+  background-image: -webkit-image-set(
+    url('../img/facebook.png') 1x,
+    url('../img/facebook@2x.png') 2x,
+    url('../img/facebook@3x.png') 3x
+  );
+}
+
+.create-account {
+  left: 45px;
+  top: 622px;
+  background-image: -webkit-image-set(
+    url('../img/createaccount.png') 1x,
+    url('../img/createaccount@2x.png') 2x,
+    url('../img/createaccount@3x.png') 3x
+  );
+}
+
+.btn-q {
+  position: absolute;
+  display: inline-block;
+  padding: 2px 8px;
+  width: 127px;
+  height: 50px;
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  font-family: "Avenir Next";
+  line-height: 50px;
+  text-align: center;
+  appearance: button;
+  text-decoration: none;
+  display: inline-block;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.q {
+  left: 45px;
+  top: 622px;
+  background-image: -webkit-image-set(
+    url('../img/q.png') 1x,
+    url('../img/q@2x.png') 2x,
+    url('../img/q@3x.png') 3x
+  );
+}
+
+.q-selected {
+  left: 45px;
+  height: 49px;
+  top: 622px;
+  background-image: -webkit-image-set(
+    url('../img/q-selected.png') 1x,
+    url('../img/q-selected@2x.png') 2x,
+    url('../img/q-selected@3x.png') 3x
+  );
+}
+
+.qcol1 {
+  left: 52px;
+}
+
+.qcol2 {
+  left: 235px;
+}
+
+.qrow1 {
+  top: 156px;
+}
+
+.qrow2 {
+  top: 250px;
+}
+
+.qrow3 {
+  top: 344px;
+}
+
+.qrow4 {
+  top: 438px;
+}
+
+.qrow5 {
+  top: 532px;
+}
+
+.qrow6 {
+  top: 628.5px;
+}
+
+
