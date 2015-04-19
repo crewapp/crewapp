@@ -11,6 +11,10 @@ angular.module('crewapp', [
   'crewapp.login',
   'crewapp.question',
   'crewapp.services',
+  'crewapp.swipe',
+  'crewapp.chatinfo',
+  'crewapp.chat',
+  'crewapp.location',
   'crewapp.splash2'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
@@ -44,6 +48,30 @@ angular.module('crewapp', [
     url: '/login',
     templateUrl: 'js/login/login.html',
     controller: 'LoginController'
+  });
+
+  $stateProvider.state('location', {
+    url: '/location',
+    templateUrl: 'js/location/location.html',
+    controller: 'LocationController'
+  });
+
+  $stateProvider.state('chat', {
+    url: '/chat',
+    templateUrl: 'js/chat/chat.html',
+    controller: 'ChatController'
+  });
+
+  $stateProvider.state('chatinfo', {
+    url: '/chatinfo',
+    templateUrl: 'js/chatinfo/chatinfo.html',
+    controller: 'ChatInfoController'
+  });
+
+  $stateProvider.state('swipe', {
+    url: '/swipe',
+    templateUrl: 'js/swipe/swipe.html',
+    controller: 'SwipeController'
   });
 })
 .run(function($ionicPlatform) {

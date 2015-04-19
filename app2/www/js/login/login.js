@@ -37,7 +37,7 @@ angular.module('crewapp.login', [])
             window.alert('error occured!');
         }
       }
-
+      $location.path('/chat');
     }).catch(function (error) {
 
       console.error(error);
