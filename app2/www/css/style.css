@@ -18,11 +18,20 @@
   margin-top: 0px;
 }
 
-.bg-form {
+.bg-form-signup {
   background-image: -webkit-image-set(
     url('../img/signup.png') 1x,
     url('../img/signup@2x.png') 2x,
     url('../img/signup@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
+.bg-form-login {
+  background-image: -webkit-image-set(
+    url('../img/login.png') 1x,
+    url('../img/login@2x.png') 2x,
+    url('../img/login@3x.png') 3x
   );
   margin-top: 0px;
 }
