@@ -57,9 +57,6 @@ angular.module('crewapp.services', [])
   };
 
 })
-// .factory('Find', function($http){
-
-// })
 .factory('Groups', function($http){
   var get = function(user) {
     return $http({

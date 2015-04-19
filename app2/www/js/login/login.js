@@ -21,7 +21,7 @@ angular.module('crewapp.login', [])
         $window.localStorage.setItem('com.trycrewapp.username', username);
         $window.localStorage.setItem('com.trycrewapp.token', data.token);
         $window.localStorage.setItem('com.trycrewapp.group', data.group);
-
+        $location.path('/chat');
       }else if(data.response === 'failed'){
         switch(data.status) {
           case 'credentials not supplied':
