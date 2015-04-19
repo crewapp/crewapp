@@ -19,12 +19,16 @@
     "smarttabs": true,
     "white": true,
     "globals": {
+        "angular": true,
         "describe": false,
         "it": false,
         "before": false,
         "beforeEach": false,
         "after": false,
         "afterEach": false,
-        "io": true
+        "io": true,
+        "window": false,
+        "cordova": false,
+        "StatusBar": false
     }
 }
