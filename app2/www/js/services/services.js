@@ -41,7 +41,25 @@ angular.module('crewapp.services', [])
     logout: logout
   };
 })
+.factory('Sockets', function($http){
 
+  var connect = function(){
+    return 'Socket:connect needs to be defined';
+  };
+
+  var disconnect = function() {
+    return 'Sockets:disconnect needs to be defined';
+  };
+
+  return {
+    connect: connect,
+    disconnect: disconnect
+  };
+
+})
+// .factory('Find', function($http){
+
+// })
 .factory('Groups', function($http){
   var get = function(user) {
     return $http({
@@ -87,10 +105,15 @@ angular.module('crewapp.services', [])
     });
   };
 
+  var list = function() {
+    return 'supposed to return list of others in room';
+  };
+
   return {
     get: get,
     leave: leave,
     join: join,
-    messages: messages
+    messages: messages,
+    list: list
   };
 });
