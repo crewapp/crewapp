@@ -105,7 +105,7 @@ angular.module('crewapp.question', [])
         ($scope.q5a || $scope.q5b) &&
         ($scope.q6a || $scope.q6b)
       ){
-      $location.path('/chat');
+      $location.path('/swipe');
     }
   };
 });
