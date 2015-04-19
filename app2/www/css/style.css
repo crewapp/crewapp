@@ -18,82 +18,135 @@
   margin-top: 0px;
 }
 
+.bg-form {
+  background-image: -webkit-image-set(
+    url('../img/signup.png') 1x,
+    url('../img/signup@2x.png') 2x,
+    url('../img/signup@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
 .btn-splash {
-  position: absolute;
-  display: inline-block;
-  padding: 2px 8px;
-  width: 325px;
-  height: 50px;
-  text-decoration: none;
-  color: white;
-  font-size: 24px;
-  font-family: "Avenir Next";
-  line-height: 50px;
-  text-align: center;
   appearance: button;
-  text-decoration: none;
+  color: white;
   display: inline-block;
+  font-family: "Avenir Next";
+  font-size: 24px;
+  height: 50px;
+  line-height: 50px;
   padding: 2px 8px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  width: 325px;
+}
+
+.form-username {
+  background-color: transparent;
+  border: none;
+  font-family: "Avenir Next";
+  font-size: 1.3em !important;
+  height:  49px !important;
+  left: 62.5px;
+  padding: 10px !important;
+  position: absolute;
+  top: 230.5px;
+  width: 289px;
+}
+
+.form-password {
+  background-color: transparent;
+  border: none;
+  font-family: "Avenir Next";
+  font-size: 1.3em !important;
+  height:  49px !important;
+  left: 62.5px;
+  padding: 10px !important;
+  position: absolute;
+  top: 299.5px;
+  width: 289px;
+}
+
+.form-submit {
+
+  appearance: button;
+  background-image: -webkit-image-set(
+    url('../img/formsubmit.png') 1x,
+    url('../img/formsubmit@2x.png') 2x,
+    url('../img/formsubmit@3x.png') 3x
+  );
+  border: 0;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Avenir Next";
+  font-size: 24px;
+  height: 50px;
+  left: 62px;
+  line-height: 50px;
+  padding: 2px 8px;
+  position: absolute;
+  text-align: center;
+  top: 388px;
+  width: 290px;
 }
 
 .fb {
-  left: 45px;
-  top: 553px;
   background-image: -webkit-image-set(
     url('../img/facebook.png') 1x,
     url('../img/facebook@2x.png') 2x,
     url('../img/facebook@3x.png') 3x
   );
+  left: 45px;
+  top: 553px;
 }
 
 .create-account {
-  left: 45px;
-  top: 622px;
   background-image: -webkit-image-set(
     url('../img/createaccount.png') 1x,
     url('../img/createaccount@2x.png') 2x,
     url('../img/createaccount@3x.png') 3x
   );
+  left: 45px;
+  top: 622px;
 }
 
 .btn-q {
-  position: absolute;
-  display: inline-block;
-  padding: 2px 8px;
-  width: 127px;
-  height: 50px;
-  text-decoration: none;
+  appearance: button;
   color: white;
+  cursor: pointer;
+  display: inline-block;
   font-size: 24px;
   font-family: "Avenir Next";
+  height: 50px;
   line-height: 50px;
-  text-align: center;
-  appearance: button;
-  text-decoration: none;
-  display: inline-block;
   padding: 2px 8px;
-  cursor: pointer;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  width: 127px;
 }
 
 .q {
-  left: 45px;
-  top: 622px;
   background-image: -webkit-image-set(
     url('../img/q.png') 1x,
     url('../img/q@2x.png') 2x,
     url('../img/q@3x.png') 3x
   );
+  left: 45px;
+  top: 622px;
 }
 
 .q-selected {
-  left: 45px;
-  height: 49px;
-  top: 622px;
   background-image: -webkit-image-set(
     url('../img/q-selected.png') 1x,
     url('../img/q-selected@2x.png') 2x,
     url('../img/q-selected@3x.png') 3x
   );
+  left: 45px;
+  height: 49px;
+  top: 622px;
 }
 
 .qcol1 {
