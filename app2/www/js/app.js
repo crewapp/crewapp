@@ -7,9 +7,10 @@
 angular.module('crewapp', [
   'ionic',
   'crewapp.splash',
-  'crewapp.splash2',
+  'crewapp.signup',
+  'crewapp.login',
   'crewapp.question',
-  'crewapp.signup'
+  'crewapp.splash2'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
@@ -38,6 +39,11 @@ angular.module('crewapp', [
     controller: 'SignUpController'
   });
 
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'js/login/login.html',
+    controller: 'LoginController'
+  });
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
