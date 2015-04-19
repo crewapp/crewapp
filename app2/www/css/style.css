@@ -18,6 +18,42 @@
   margin-top: 0px;
 }
 
+.bg-location {
+  background-image: -webkit-image-set(
+    url('../img/location.png') 1x,
+    url('../img/location@2x.png') 2x,
+    url('../img/location@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
+.bg-swipe {
+  background-image: -webkit-image-set(
+    url('../img/swipe.png') 1x,
+    url('../img/swipe@2x.png') 2x,
+    url('../img/swipe@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
+.bg-chat {
+  background-image: -webkit-image-set(
+    url('../img/chatroom.png') 1x,
+    url('../img/chatroom@2x.png') 2x,
+    url('../img/chatroom@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
+.bg-chatinfo {
+  background-image: -webkit-image-set(
+    url('../img/chatinfo.png') 1x,
+    url('../img/chatinfo@2x.png') 2x,
+    url('../img/chatinfo@3x.png') 3x
+  );
+  margin-top: 0px;
+}
+
 .nav-back {
   position: absolute;
   left: 10px;
