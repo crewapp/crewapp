@@ -1,10 +1,25 @@
+'use strict';
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('crewapp', ['ionic', 'crewapp.splash', 'crewapp.splash2'])
+.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
 
+  $stateProvider.state('home', {
+    url: '/',
+    templateUrl: 'js/splash/splash.html',
+    controller: 'SplashController'
+  });
+
+  $stateProvider.state('splash2', {
+    url: '/splash2',
+    templateUrl: 'js/splash2/splash.html',
+    controller: 'SplashController2'
+  });
+})
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -16,4 +31,4 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
+});
