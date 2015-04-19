@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         jshintrc: '.jshintrc',
-        ignores: ['./**/node_modules', '**/*.ios.js', 'app/views/**/*.js'], 
+        ignores: ['./**/node_modules', '**/*.ios.js', 'app/views/**/*.js', 'app2/**/*'], 
       },
       all: ['./']
     },
