@@ -13,10 +13,14 @@
   width: 414px;
   height: 736px;
   position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0px;
 }
 
 #banner div {
   position: absolute;
+  margin: 0px;
 }
 
 #banner div:nth-child(2) {
