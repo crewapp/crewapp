@@ -9,6 +9,38 @@
   margin-top: 0px;
 }
 
+#banner {
+  width: 414px;
+  height: 736px;
+  position: absolute;
+}
+
+#banner div {
+  position: absolute;
+}
+
+#banner div:nth-child(2) {
+  -webkit-animation: wipe 6s;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-direction: up;
+  -webkit-mask-size: 300px 3000px;
+  -webkit-mask-image: -webkit-gradient(linear, left bottom, left top,
+    color-stop(0.00,  rgba(0,0,0,0)),
+    color-stop(0.25,  rgba(0,0,0,0)),
+    color-stop(0.27,  rgba(0,0,0,0)),
+    color-stop(0.80,  rgba(0,0,0,1)),
+    color-stop(1.00,  rgba(0,0,0,1)));
+ }
+
+ @-webkit-keyframes wipe {
+     0% {
+    -webkit-mask-position: 414px 736px;
+  }
+     100% {
+    -webkit-mask-position: 0 0;
+  }
+}
+
 .bg-question {
   background-image: -webkit-image-set(
     url('../img/questions.png') 1x,
