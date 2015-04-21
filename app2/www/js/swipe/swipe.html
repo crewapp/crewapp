@@ -3,5 +3,12 @@
     <a href="#/location" class="nav-back"></a>
     <br><br><br><a href="#/chat">Chat Room</a>
     <br><br>This is the swipe screen
+
+    <td-cards>
+      <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+        Card content here
+      </td-card>
+    </td-cards>
+
   </ion-content>
 </ion-view>
