@@ -6,6 +6,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('crewapp', [
   'ionic',
+  'btford.socket-io',
   'crewapp.splash',
   'crewapp.signup',
   'crewapp.login',
