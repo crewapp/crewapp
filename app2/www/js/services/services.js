@@ -41,22 +41,27 @@ angular.module('crewapp.services', [])
     logout: logout
   };
 })
-.factory('Sockets', function(socketFactory){
+.factory('Sockets', function(socketFactory, $http){
+  var myIoSocket = io.connect('chat.trycrewapp.com');
 
-  return socketFactory();
-  
-  var connect = function(){
-    return 'Socket:connect needs to be defined';
+  var mySocket = socketFactory({
+      ioSocket: myIoSocket
+    });
+
+  var rooms = function() {
+    return $http({
+      method: 'GET',
+      url: 'http://trycrewapp.com/api/rooms'
+    })
+    .then(function(resp){
+      console.log(resp.data);
+    });
   };
 
-  var disconnect = function() {
-    return 'Sockets:disconnect needs to be defined';
-  };
-
-  // return {
-  //   connect: connect,
-  //   disconnect: disconnect
-  // };
+  return {
+    rooms: rooms,
+    mySocket: mySocket
+  }
 
 })
 .factory('Groups', function($http){
