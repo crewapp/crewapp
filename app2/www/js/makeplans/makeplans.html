@@ -1,0 +1,60 @@
+<ion-view hide-nav-bar="true">
+  <ion-content scroll="false">
+  <a href="#/chat" class="nav-back"></a>
+  <br><br><br><a href="#/swipe">Swipe</a>
+  <br><br>This is the make plans screen.
+
+  <label class="item item-input">
+  <input type="text" g-places-autocomplete ng-model="place" placeholder="Enter A Place"/>
+  </label>
+<!--   <label class="item item-input">
+  <input type="text" g-places-autocomplete ng-model="choices.second" placeholder="Second Option"/>
+  </label> -->
+
+  <div class="list card">
+
+<!--     <div class="item item-thumbnail-left">
+      <h2>Marty McFly</h2>
+      <p>November 05, 1955</p>
+    </div> -->
+
+    <div class="item item-body">
+      <div class="row">
+      <div class="col" ng-if="firstPlace">
+        Your first choice: {{ firstPlace.name }}.
+        <img src="{{firstPhoto}}" ng-if="firstPhoto" />
+      </div>
+      <div class="col" ng-if="secondPlace">
+        Your second choice: {{ secondPlace.name }}.
+        <img src="{{secondPhoto}}" ng-if="secondPhoto" />
+      </div>
+      </div>
+<!--       <p>
+        <a href="#" class="subdued">1 Like</a>
+        <a href="#" class="subdued">5 Comments</a>
+      </p>
+ -->    </div>
+
+<!--     <div class="item tabs tabs-secondary tabs-icon-left">
+      <a class="tab-item" href="#">
+        <i class="icon ion-thumbsup"></i>
+        {{ choices.first.name }}
+        <img src="{choices.first.name.photos[0].getUrl}" />
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-chatbox"></i>
+        {{ choices.second.name }}
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-share"></i>
+        Share
+      </a>
+    </div>
+ -->
+  </div>
+
+  <button class="button button-full button-royal" id="submit" ng-click="makePlans(place)">
+    Submit
+  </button>
+  </ion-content>
+</ion-view>
