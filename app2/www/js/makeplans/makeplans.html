@@ -4,9 +4,12 @@
   <br><br><br><a href="#/swipe">Swipe</a>
   <br><br>This is the make plans screen.
 
-  <label class="item item-input">
-  <input type="text" g-places-autocomplete ng-model="place" ng-disabled="!oneClear" placeholder="Enter A Place"/>
+  <label class="item item-input item-button-right">
+  <input type="text" g-places-autocomplete ng-model="place" ng-disabled="!bothEntered" placeholder="Enter A Place"/>
   </label>
+  <button class="button button-block button-stable ion-plus-round" ng-disabled="!bothEntered" ng-click="makePlans(place); place = null">
+    </button>
+
 <!--   <label class="item item-input">
   <input type="text" g-places-autocomplete ng-model="choices.second" placeholder="Second Option"/>
   </label> -->
@@ -20,22 +23,20 @@
 
     <div class="item item-body">
       <div class="row">
-      <div class="col" ng-if="firstPlace">
-        Your first choice: {{ firstPlace.name }}.
+      <div class="col" ng-if="one">
+        {{ one.name }}
         <br>
-        <img src="{{firstPhoto}}" ng-if="firstPhoto" />
-      </div>
-      <div class="col" ng-if="secondPlace">
-        Your second choice: {{ secondPlace.name }}.
+        {{ one.formatted_address }}
         <br>
-        <img src="{{secondPhoto}}" ng-if="secondPhoto" />
+        <img src="{{one.photo}}" ng-if="one.photo" />
+      </div>
+      <div class="col" ng-if="two">
+        Your second choice: {{ two.name }}.
+        <br>
+        <img src="{{two.photo}}" ng-if="two.photo" />
       </div>
       </div>
-<!--       <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
- -->    </div>
+ </div>
 
 <!--     <div class="item tabs tabs-secondary tabs-icon-left">
       <a class="tab-item" href="#">
@@ -52,11 +53,11 @@
         Share
       </a>
     </div>
- -->
-  </div>
 
-  <button class="button button-full button-royal" id="submit" ng-click="makePlans(place); place = null">
-    Submit
+  </div>
+ -->
+  <button class="button button-block button-royal" id="submit" ng-disabled="bothEntered" ng-click="submitPlans()">
+    Submit Choices
   </button>
   </ion-content>
 </ion-view>
