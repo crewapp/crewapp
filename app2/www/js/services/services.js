@@ -1,7 +1,7 @@
 'use strict';
 angular.module('crewapp.services', [])
 
-.factory('Auth', function($http) {
+.factory('Auth', function($http, $cordovaOauth, $localStorage, $location) {
   var login = function(user) {
     return $http({
       method: 'POST',
@@ -13,15 +13,64 @@ angular.module('crewapp.services', [])
     });
   };
 
-  var signup = function(user) {
+  var fbLogin = function() {
+    ionic.Platform.ready(function(){
+      $cordovaOauth
+        .facebook('438594989641449', ['email'])
+        .then(function(result) {
+          $localStorage.accessToken = result.access_token;
+          $localStorage.expiresIn = Math.floor(Date.now()/1000)+result.expires_in;
+          profile();
+        }, function(error) {
+          alert('something went wrong: ' + error);
+        });
+    });
+  };
+
+  var sendProfile = function (user) {
     return $http({
       method: 'POST',
-      url: 'http://trycrewapp.com/api/auth/signup',
+      url: 'http://trycrewapp.com/api/auth/update',
       data: user
     })
     .then(function(resp){
       return resp.data;
     });
+  };
+
+  var profile = function() {
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+      return $http.get('https://graph.facebook.com/v2.2/me', {
+        params: {
+          access_token: $localStorage.accessToken,
+          fields: 'id,name,gender,location,picture',
+          format: 'json'
+        }
+      }).then(function(result) {
+        $localStorage.name = result.data.name;
+        $localStorage.gender = result.data.gender;
+        $localStorage.id = result.data.id;
+        $localStorage.picture = result.data.picture.data.url;
+
+
+        sendProfile({
+          id: result.data.id,
+          name: result.data.name,
+          gender: result.data.gender,
+          picture: result.data.picture.data.url
+        });
+
+        return result;
+      }).catch(function(error){
+        alert('Error: ' + error);
+        $location.path('/');
+      });
+    }else {
+      alert('Not signed in!');
+      $location.path('/');
+    }
   };
 
   var logout = function(user) {
@@ -35,26 +84,38 @@ angular.module('crewapp.services', [])
     });
   };
 
+  var signup = function(signup) {
+    $location.path('/location');
+  };
   return {
     login: login,
+    profile: profile,
+    logout: logout,
     signup: signup,
-    logout: logout
+    fbLogin: fbLogin
   };
 })
-.factory('Sockets', function($http){
+.factory('Sockets', function(socketFactory, $http){
+  var myIoSocket = io.connect('chat.trycrewapp.com');
 
-  var connect = function(){
-    return 'Socket:connect needs to be defined';
-  };
+  var mySocket = socketFactory({
+      ioSocket: myIoSocket
+    });
 
-  var disconnect = function() {
-    return 'Sockets:disconnect needs to be defined';
+  var rooms = function() {
+    return $http({
+      method: 'GET',
+      url: 'http://trycrewapp.com/api/rooms'
+    })
+    .then(function(resp){
+      console.log(resp.data);
+    });
   };
 
   return {
-    connect: connect,
-    disconnect: disconnect
-  };
+    rooms: rooms,
+    mySocket: mySocket
+  }
 
 })
 .factory('Groups', function($http){
