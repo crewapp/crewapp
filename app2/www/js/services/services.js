@@ -95,8 +95,10 @@ angular.module('crewapp.services', [])
     fbLogin: fbLogin
   };
 })
-.factory('Sockets', function($http){
+.factory('Sockets', function(socketFactory){
 
+  return socketFactory();
+  
   var connect = function(){
     return 'Socket:connect needs to be defined';
   };
@@ -105,10 +107,10 @@ angular.module('crewapp.services', [])
     return 'Sockets:disconnect needs to be defined';
   };
 
-  return {
-    connect: connect,
-    disconnect: disconnect
-  };
+  // return {
+  //   connect: connect,
+  //   disconnect: disconnect
+  // };
 
 })
 .factory('Groups', function($http){

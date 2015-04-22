@@ -8,6 +8,7 @@ angular.module('crewapp', [
   'ionic',
   'ngCordova',
   'ngStorage',
+  'btford.socket-io',
   'crewapp.splash',
   'crewapp.signup',
   'crewapp.login',
