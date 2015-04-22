@@ -1,7 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var db = require('../database');
-var bcrypt = require('bcrypt-nodejs');
+// var bcrypt = require('bcrypt-nodejs');
 var helper = require('./../helper');
 
 router.post('/update', function(req, res){
