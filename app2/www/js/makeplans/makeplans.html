@@ -5,7 +5,7 @@
   <br><br>This is the make plans screen.
 
   <label class="item item-input">
-  <input type="text" g-places-autocomplete ng-model="place" placeholder="Enter A Place"/>
+  <input type="text" g-places-autocomplete ng-model="place" ng-disabled="!oneClear" placeholder="Enter A Place"/>
   </label>
 <!--   <label class="item item-input">
   <input type="text" g-places-autocomplete ng-model="choices.second" placeholder="Second Option"/>
@@ -22,10 +22,12 @@
       <div class="row">
       <div class="col" ng-if="firstPlace">
         Your first choice: {{ firstPlace.name }}.
+        <br>
         <img src="{{firstPhoto}}" ng-if="firstPhoto" />
       </div>
       <div class="col" ng-if="secondPlace">
         Your second choice: {{ secondPlace.name }}.
+        <br>
         <img src="{{secondPhoto}}" ng-if="secondPhoto" />
       </div>
       </div>
@@ -53,7 +55,7 @@
  -->
   </div>
 
-  <button class="button button-full button-royal" id="submit" ng-click="makePlans(place)">
+  <button class="button button-full button-royal" id="submit" ng-click="makePlans(place); place = null">
     Submit
   </button>
   </ion-content>
