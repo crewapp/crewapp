@@ -40,8 +40,8 @@ angular.module('crewapp.services', [])
 
   var profile = function() {
     if($localStorage.hasOwnProperty('accessToken') === true &&
-        $localStorage.hasOwnProperty('expires_in') === true &&
-        $localStorage.expiresIn < Math.floor(Date.now()/1000)) {
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
       return $http.get('https://graph.facebook.com/v2.2/me', {
         params: {
           access_token: $localStorage.accessToken,
@@ -49,17 +49,17 @@ angular.module('crewapp.services', [])
           format: 'json'
         }
       }).then(function(result) {
-        $localStorage.name = result.name;
-        $localStorage.gender = result.gender;
-        $localStorage.id = result.id;
-        $localStorage.picture = result.picture.url;
+        $localStorage.name = result.data.name;
+        $localStorage.gender = result.data.gender;
+        $localStorage.id = result.data.id;
+        $localStorage.picture = result.data.picture.data.url;
 
 
         sendProfile({
-          id: result.id,
-          name: result.name,
-          gender: result.gender,
-          picture: result.picture.url
+          id: result.data.id,
+          name: result.data.name,
+          gender: result.data.gender,
+          picture: result.data.picture.data.url
         });
 
         return result;
@@ -68,7 +68,7 @@ angular.module('crewapp.services', [])
         $location.path('/');
       });
     }else {
-      alert('Not signed in');
+      alert('Not signed in!');
       $location.path('/');
     }
   };
