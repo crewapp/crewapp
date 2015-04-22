@@ -11,10 +11,15 @@ var sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.pas
 });
 
 var User = sequelize.define('users', {
+  fbid: {
+    type: Sequelize.INTEGER,
+    unique: true
+  },
   username: {
     type: Sequelize.STRING,
     unique: true
   },
+  gender: Sequelize.STRING,
   password: Sequelize.STRING,
   token: {
     type: Sequelize.STRING,
