@@ -1,7 +1,7 @@
 'use strict';
 angular.module('crewapp.services', [])
 
-.factory('Auth', function($http) {
+.factory('Auth', function($http, $cordovaOauth, $localStorage, $location) {
   var login = function(user) {
     return $http({
       method: 'POST',
@@ -13,15 +13,64 @@ angular.module('crewapp.services', [])
     });
   };
 
-  var signup = function(user) {
+  var fbLogin = function() {
+    ionic.Platform.ready(function(){
+      $cordovaOauth
+        .facebook('438594989641449', ['email'])
+        .then(function(result) {
+          $localStorage.accessToken = result.access_token;
+          $localStorage.expiresIn = Math.floor(Date.now()/1000)+result.expires_in;
+          profile();
+        }, function(error) {
+          alert('something went wrong: ' + error);
+        });
+    });
+  };
+
+  var sendProfile = function (user) {
     return $http({
       method: 'POST',
-      url: 'http://trycrewapp.com/api/auth/signup',
+      url: 'http://trycrewapp.com/api/auth/update',
       data: user
     })
     .then(function(resp){
       return resp.data;
     });
+  };
+
+  var profile = function() {
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expires_in') === true &&
+        $localStorage.expiresIn < Math.floor(Date.now()/1000)) {
+      return $http.get('https://graph.facebook.com/v2.2/me', {
+        params: {
+          access_token: $localStorage.accessToken,
+          fields: 'id,name,gender,location,picture',
+          format: 'json'
+        }
+      }).then(function(result) {
+        $localStorage.name = result.name;
+        $localStorage.gender = result.gender;
+        $localStorage.id = result.id;
+        $localStorage.picture = result.picture.url;
+
+
+        sendProfile({
+          id: result.id,
+          name: result.name,
+          gender: result.gender,
+          picture: result.picture.url
+        });
+
+        return result;
+      }).catch(function(error){
+        alert('Error: ' + error);
+        $location.path('/');
+      });
+    }else {
+      alert('Not signed in');
+      $location.path('/');
+    }
   };
 
   var logout = function(user) {
@@ -35,10 +84,15 @@ angular.module('crewapp.services', [])
     });
   };
 
+  var signup = function(signup) {
+    $location.path('/location');
+  };
   return {
     login: login,
+    profile: profile,
+    logout: logout,
     signup: signup,
-    logout: logout
+    fbLogin: fbLogin
   };
 })
 .factory('Sockets', function($http){
