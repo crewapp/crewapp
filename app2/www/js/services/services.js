@@ -59,7 +59,8 @@ angular.module('crewapp.services', [])
           id: result.data.id,
           name: result.data.name,
           gender: result.data.gender,
-          picture: result.data.picture.data.url
+          picture: result.data.picture.data.url,
+          token: $localStorage.accessToken
         });
 
         return result;
