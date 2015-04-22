@@ -15,7 +15,8 @@ angular.module('crewapp', [
   'crewapp.chatinfo',
   'crewapp.chat',
   'crewapp.location',
-  'crewapp.splash2'
+  'crewapp.splash2',
+  'crewapp.makeplans'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
@@ -73,6 +74,12 @@ angular.module('crewapp', [
     templateUrl: 'js/swipe/swipe.html',
     controller: 'SwipeController'
   });
+
+  $stateProvider.state('makeplans', {
+    url: '/makeplans',
+    templateUrl: 'js/makeplans/makeplans.html',
+    controller: 'MakePlansController'
+  })
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
