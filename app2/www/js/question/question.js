@@ -1,14 +1,25 @@
 'use strict';
 angular.module('crewapp.question', [])
-.controller('QuestionController', function($scope, $location){
+.controller('QuestionController', function($scope, $location, $localStorage, Question, Auth){
+
+  Auth.validate();
+
+  if($localStorage.question){
+    $location.path('/chat');
+  }
+
   $scope.question = [
-    ['Tacos', 'Burgers'],
-    ['Coffee', 'Tea'],
-    ['Stanford', 'Cal'],
-    ['Windows', 'Mac'],
-    ['Five guys', 'In-n-out'],
-    ['Coke', 'Pepsi']
+    { 'id': 0, 'choiceOne': 'loading', 'choiceTwo': 'loading' },
+    { 'id': 0, 'choiceOne': 'loading', 'choiceTwo': 'loading' },
+    { 'id': 0, 'choiceOne': 'loading', 'choiceTwo': 'loading' },
+    { 'id': 0, 'choiceOne': 'loading', 'choiceTwo': 'loading' },
+    { 'id': 0, 'choiceOne': 'loading', 'choiceTwo': 'loading' },
+    { 'id': 0, 'choiceOne': 'loading', 'choiceTwo': 'loading' }
   ];
+  Question.getRandom()
+    .then(function(questions){
+      $scope.question = questions;
+    });
   $scope.q1a = false;
   $scope.q1b = false;
   $scope.q2a = false;
@@ -103,9 +114,34 @@ angular.module('crewapp.question', [])
         ($scope.q3a || $scope.q3b) &&
         ($scope.q4a || $scope.q4b) &&
         ($scope.q5a || $scope.q5b) &&
-        ($scope.q6a || $scope.q6b)
+        ($scope.q6a || $scope.q6b) &&
+        $scope.question[0].id !== 0 &&
+        $scope.question[5].id !== 0
       ){
-      $location.path('/swipe');
+      Question.setQuestion(parseResults())
+        .then(function(response){
+          $location.path('/chat');
+        });
     }
+  };
+
+  var choice = function(question) {
+    if($scope['q'+question+'a']){
+      return 1;
+    }else{
+      return 2;
+    }
+  };
+
+  var parseResults = function() {
+
+    var output = [];
+    for(var i = 0; i < $scope.question.length; i++){
+      output.push({
+        'question_id': $scope.question[i].id,
+        'question_choice': choice(i)
+      });
+    }
+    return output;
   };
 });
