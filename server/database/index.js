@@ -50,11 +50,13 @@ var QuestionResponse = sequelize.define('response', {
     references: 'users',
     referencesKey: 'id'
   },
-  question_choice: {
+  question_id: {
     type: Sequelize.INTEGER,
     references: 'questions',
     referencesKey: 'id'
-  }
+  },
+  question_choice: Sequelize.INTEGER
+
 });
 
 var Message = sequelize.define('message', {
