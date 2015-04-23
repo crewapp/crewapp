@@ -9,7 +9,7 @@ angular.module('crewapp.chatinfo', [])
     $scope.makePlans = function(place) {
       var photo = function() {
         if (!!place.photos){
-          return place.photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150});
+          return place.photos[0].getUgrl({'maxWidth': 150, 'maxHeight': 150});
         } else {
           return 'http://www.mtwomeybutchers.ie/wp-content/uploads/placeholder.gif';
         }
