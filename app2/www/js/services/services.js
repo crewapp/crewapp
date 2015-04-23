@@ -34,11 +34,31 @@ angular.module('crewapp.services', [])
       data: user
     })
     .then(function(resp){
-      $localStorage.groupname = resp.groupname;
-      $localStorage.question = resp.question;
+      $localStorage.groupname = resp.data.groupname;
+      $localStorage.question = resp.data.question;
+
+      if(resp.question){
+        $location.path('/chat');
+      }else{
+        $location.path('/question');
+      }
       return resp.data;
     });
   };
+
+  var validate = function() {
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.hasOwnProperty('question') === true &&
+        $localStorage.hasOwnProperty('groupname') === true &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+      return true;
+    }else{
+      alert('You are not signed in');
+      $location.path('/');
+    }
+  };
+
 
   var profile = function() {
     if($localStorage.hasOwnProperty('accessToken') === true &&
@@ -57,15 +77,16 @@ angular.module('crewapp.services', [])
         $localStorage.picture = result.data.picture.data.url;
 
 
-        sendProfile({
+        return sendProfile({
           id: result.data.id,
           name: result.data.name,
           gender: result.data.gender,
           picture: result.data.picture.data.url,
           token: $localStorage.accessToken
+        }).then(function(result){
+          return result;
         });
 
-        return result;
       }).catch(function(error){
         alert('Error: ' + error);
         $location.path('/');
@@ -76,29 +97,20 @@ angular.module('crewapp.services', [])
     }
   };
 
-  var logout = function(user) {
-    return $http({
-      method: 'POST',
-      url: 'http://trycrewapp.com/api/auth/',
-      data: user
-    })
-    .then(function(resp){
-      return resp.data;
-    });
+  var logout = function() {
+    $localStorage.$reset();
+    $location.path('/');
   };
 
-  var signup = function(signup) {
-    $location.path('/location');
-  };
   return {
     login: login,
-    profile: profile,
     logout: logout,
-    signup: signup,
+    validate: validate,
+    profile: profile,
     fbLogin: fbLogin
   };
 })
-.factory('Questions', function($http, $localStorage){
+.factory('Question', function($http, $localStorage){
 
   var getRandom = function(){
     return $http({
@@ -106,8 +118,7 @@ angular.module('crewapp.services', [])
       url: 'http://trycrewapp.com/api/question/random'
     })
     .then(function(resp){
-      alert(resp);
-      return resp;
+      return resp.data;
     });
   };
 
@@ -118,6 +129,7 @@ angular.module('crewapp.services', [])
         $localStorage.hasOwnProperty('question') === true &&
         $localStorage.question === false &&
         $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+
       return $http({
         method: 'POST',
         url: 'http://trycrewapp.com/api/question/set',
@@ -127,9 +139,10 @@ angular.module('crewapp.services', [])
         }
       })
       .then(function(resp){
-        alert(resp);
         return resp;
       });
+    }else{
+      alert('Something went wrong');
     }
   };
 
