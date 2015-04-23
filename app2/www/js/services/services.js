@@ -34,7 +34,7 @@ angular.module('crewapp.services', [])
       data: user
     })
     .then(function(resp){
-      $localStorage.groupname = resp.data.groupname;
+      $localStorage.groupname = resp.data.group;
       $localStorage.question = resp.data.question;
 
       if(resp.question){
