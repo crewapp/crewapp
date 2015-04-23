@@ -78,11 +78,6 @@ angular.module('crewapp', [
     controller: 'SwipeController'
   });
 
-  $stateProvider.state('makeplans', {
-    url: '/makeplans',
-    templateUrl: 'js/makeplans/makeplans.html',
-    controller: 'MakePlansController'
-  })
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
