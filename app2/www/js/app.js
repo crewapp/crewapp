@@ -76,6 +76,7 @@ angular.module('crewapp', [
     templateUrl: 'js/swipe/swipe.html',
     controller: 'SwipeController'
   });
+
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
