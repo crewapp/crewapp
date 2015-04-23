@@ -33,7 +33,7 @@ var rooms = [{name: 'Blue-Penguin', count: 0},
 chatRouter.get('/rooms', function(req, res){
   res.end(rooms[Math.floor(Math.random() * rooms.length)].name);
 });
- 
+
 chatApp.use('/api', chatRouter);
 
 chatServer.listen(process.env.CHATPORT || 5000);
@@ -57,6 +57,13 @@ io.sockets.on('connection', function(socket) {
 
 //------ Our App Server ------//
 app.use(express.static(__dirname + '/../client'));
+
+app.use('/', function(req, res, next) {
+  console.log('hello');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 // 2 for dev, 0 for production
 app.set('json spaces', 2);
