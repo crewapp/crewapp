@@ -12,7 +12,7 @@ var sequelize = new Sequelize(dbconfig.database, dbconfig.username, dbconfig.pas
 
 var User = sequelize.define('users', {
   fbid: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.BIGINT,
     unique: true
   },
   username: {
