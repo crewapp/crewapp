@@ -45,7 +45,7 @@ angular.module('crewapp.services', [])
       return $http.get('https://graph.facebook.com/v2.2/me', {
         params: {
           access_token: $localStorage.accessToken,
-          fields: 'id,name,gender,location,picture',
+          fields: 'id,name,gender,location,picture.width(168).height(168)',
           format: 'json'
         }
       }).then(function(result) {
