@@ -18,8 +18,7 @@ angular.module('crewapp', [
   'crewapp.chatinfo',
   'crewapp.chat',
   'crewapp.location',
-  'crewapp.splash2',
-  'crewapp.makeplans'
+  'crewapp.splash2'
   ])
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
