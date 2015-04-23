@@ -36,6 +36,7 @@ router.post('/update', function(req, res){
                       res.json({
                         response: 'success',
                         token: user.token,
+                        question: user.question,
                         group: group.groupname
                       });
                     });
@@ -63,6 +64,7 @@ router.post('/update', function(req, res){
               }
               res.json({
                 response: 'success',
+                question: dbUser.question,
                 group: groupname
               });
             });

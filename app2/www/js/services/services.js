@@ -34,6 +34,8 @@ angular.module('crewapp.services', [])
       data: user
     })
     .then(function(resp){
+      $localStorage.groupname = resp.groupname;
+      $localStorage.question = resp.question;
       return resp.data;
     });
   };
@@ -95,6 +97,47 @@ angular.module('crewapp.services', [])
     signup: signup,
     fbLogin: fbLogin
   };
+})
+.factory('Questions', function($http, $localStorage){
+
+  var getRandom = function(){
+    return $http({
+      method: 'GET',
+      url: 'http://trycrewapp.com/api/question/random'
+    })
+    .then(function(resp){
+      alert(resp);
+      return resp;
+    });
+  };
+
+  var setQuestion = function(answers){
+
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.hasOwnProperty('question') === true &&
+        $localStorage.question === false &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+      return $http({
+        method: 'POST',
+        url: 'http://trycrewapp.com/api/question/set',
+        data: {
+          qres: answers,
+          token: $localStorage.accessToken
+        }
+      })
+      .then(function(resp){
+        alert(resp);
+        return resp;
+      });
+    }
+  };
+
+  return {
+    getRandom: getRandom,
+    setQuestion: setQuestion
+  };
+
 })
 .factory('Sockets', function(socketFactory, $http){
   var myIoSocket = io.connect('chat.trycrewapp.com');
