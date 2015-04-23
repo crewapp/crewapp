@@ -3,7 +3,6 @@ var router = require('express').Router();
 var db = require('./../database');
 var helper = require('./../helper');
 
-
 router.post('/', function(req, res){
   var username = req.body.username;
   var token = req.body.token;
