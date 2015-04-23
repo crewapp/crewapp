@@ -38,8 +38,4 @@ angular.module('crewapp.chatinfo', [])
       $scope.plans.two = $scope.two;
       console.log($scope.two);
     }
-  })
-  .factory('plansFactory', function() {
-    var services = {};
-    return services;
-  })
+  });
