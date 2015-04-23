@@ -20,6 +20,10 @@ var User = sequelize.define('users', {
     type: Sequelize.STRING,
     unique: true
   },
+  question: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   name: Sequelize.TEXT,
   picture: Sequelize.TEXT,
   gender: Sequelize.STRING,
