@@ -16,7 +16,7 @@ angular.module('crewapp.services', [])
   var fbLogin = function() {
     ionic.Platform.ready(function(){
       $cordovaOauth
-        .facebook('438594989641449', ['email'])
+        .facebook('440534219447526', ['email'])
         .then(function(result) {
           $localStorage.accessToken = result.access_token;
           $localStorage.expiresIn = Math.floor(Date.now()/1000)+result.expires_in;
