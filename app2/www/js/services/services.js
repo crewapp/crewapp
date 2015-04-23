@@ -175,4 +175,8 @@ angular.module('crewapp.services', [])
     messages: messages,
     list: list
   };
+})
+.factory('plansFactory', function() {
+  var services = {};
+  return services;
 });
