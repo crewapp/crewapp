@@ -152,27 +152,14 @@ angular.module('crewapp.services', [])
   };
 
 })
-.factory('Sockets', function(socketFactory, $http){
-  var myIoSocket = io.connect('chat.trycrewapp.com');
+.factory('Sockets', function(socketFactory){
+  var myIoSocket = io.connect('http://chat.trycrewapp.com');
 
   var mySocket = socketFactory({
       ioSocket: myIoSocket
     });
 
-  var rooms = function() {
-    return $http({
-      method: 'GET',
-      url: 'http://trycrewapp.com/api/rooms'
-    })
-    .then(function(resp){
-      console.log(resp.data);
-    });
-  };
-
-  return {
-    rooms: rooms,
-    mySocket: mySocket
-  }
+  return mySocket;
 
 })
 .factory('Groups', function($http){
