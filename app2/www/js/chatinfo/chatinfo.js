@@ -1,5 +1,5 @@
 'use strict';
-angular.module('crewapp.chatinfo', [])
+angular.module('crewapp.chatinfo', ['google.places'])
 .controller('ChatInfoController', function($scope, plansFactory){
   $scope.test = 'hello';
     $scope.bothEntered = true;
@@ -7,9 +7,13 @@ angular.module('crewapp.chatinfo', [])
     $scope.plans = plansFactory;
 
     $scope.makePlans = function(place) {
+      if (!place) {
+        alert('Please enter a place!');
+      };
+
       var photo = function() {
         if (!!place.photos){
-          return place.photos[0].getUgrl({'maxWidth': 150, 'maxHeight': 150});
+          return place.photos[0].getUrl({'maxWidth': 150, 'maxHeight': 150});
         } else {
           return 'http://www.mtwomeybutchers.ie/wp-content/uploads/placeholder.gif';
         }
@@ -20,7 +24,7 @@ angular.module('crewapp.chatinfo', [])
         $scope.one.name = place.name;
         $scope.one.address = place.formatted_address
         $scope.one.numVotes = 0;
-        console.log(place);
+        console.log($scope.one);
       }
       else if (!$scope.secondPlace) {
         $scope.two = {};
