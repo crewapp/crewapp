@@ -90,6 +90,125 @@
   margin-top: 0px;
 }
 
+/* Chat room styles */ 
+
+.profile-picture {
+  border-radius: 200px;
+  height: 50px;
+  margin-bottom: -56px;
+  margin-left: -58px;
+}
+.message-container {
+  display: block;
+  height: 100%;
+  width: 310px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message-text {
+  margin-top: -30px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.chat-view {
+  position: absolute;
+  margin-top: 82.9px;
+  height: 603.62px;
+  width: 414px;
+  background: #FFFEF5;
+  font-family: "Avenir Next";
+  font-size: 18px;
+  border: 0px solid #979797;
+}
+
+.message-bubble {
+  display: block;
+  width: 310px;
+  padding: 10px;
+  position: relative;
+  float: top;
+  background-image: -webkit-image-set(
+    url('../img/message-middle.png') 1x,
+    url('../img/message-middle@2x.png') 2x,
+    url('../img/message-middle@3x.png') 3x
+  );
+}
+
+.top-message {
+  display: block;
+  height: 32px;
+  width: 310px;
+  position: relative;
+  float: top;
+  background-image: -webkit-image-set(
+    url('../img/message-top.png') 1x,
+    url('../img/message-top@2x.png') 2x,
+    url('../img/message-top@3x.png') 3x
+  );
+
+  background-repeat: no-repeat;
+}
+
+.bottom-message {
+  display: block;
+  position: absolute;
+  float: top;
+  width: 310px;
+  height: 20px;
+  margin-bottom: 20px;
+  background-image: -webkit-image-set(
+    url('../img/message-bottom.png') 1x,
+    url('../img/message-bottom@2x.png') 2x,
+    url('../img/message-bottom@3x.png') 3x
+  );
+  background-repeat: no-repeat;
+}
+
+.left-message {
+  display: block;
+  position: relative;
+  float: left;
+  width: 10px;
+  height: 77px;
+  background-image: -webkit-image-set(
+    url('../img/left-message-border.png') 1x,
+    url('../img/left-message-border@2x.png') 2x,
+    url('../img/left-message-border@3x.png') 3x
+  );
+  background-repeat: no-repeat;
+}
+
+.right-message {
+  display: block;
+  position: relative;
+  float: right;
+  width: 11px;
+  height: 77px;
+  background-image: -webkit-image-set(
+    url('../img/right-message-border.png') 1x,
+    url('../img/right-message-border@2x.png') 2x,
+    url('../img/right-message-border@3x.png') 3x
+  );
+  background-repeat: no-repeat;
+}
+
+.chat-form {
+  position: absolute;
+  background-color: transparent;
+  font-family: "Avenir Next";
+  font-size: 1.3em !important;
+  padding: 10px !important;
+  
+  left: 8.85px;
+  top: 693.75px;
+  height: 34px !important;
+  width: 320px;
+  border: none;
+}
+
 .nav-back {
   position: absolute;
   left: 10px;
