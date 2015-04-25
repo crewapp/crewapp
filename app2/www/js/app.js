@@ -6,6 +6,9 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('crewapp', [
   'ionic',
+  'ngCordova',
+  'ngStorage',
+  'btford.socket-io',
   'crewapp.splash',
   'crewapp.signup',
   'crewapp.login',
@@ -73,6 +76,7 @@ angular.module('crewapp', [
     templateUrl: 'js/swipe/swipe.html',
     controller: 'SwipeController'
   });
+
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

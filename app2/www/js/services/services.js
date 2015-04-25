@@ -1,7 +1,7 @@
 'use strict';
 angular.module('crewapp.services', [])
 
-.factory('Auth', function($http) {
+.factory('Auth', function($http, $cordovaOauth, $localStorage, $location) {
   var login = function(user) {
     return $http({
       method: 'POST',
@@ -13,48 +13,153 @@ angular.module('crewapp.services', [])
     });
   };
 
-  var signup = function(user) {
+  var fbLogin = function() {
+    ionic.Platform.ready(function(){
+      $cordovaOauth
+        .facebook('440534219447526', ['email'])
+        .then(function(result) {
+          $localStorage.accessToken = result.access_token;
+          $localStorage.expiresIn = Math.floor(Date.now()/1000)+result.expires_in;
+          profile();
+        }, function(error) {
+          alert('something went wrong: ' + error);
+        });
+    });
+  };
+
+  var sendProfile = function (user) {
     return $http({
       method: 'POST',
-      url: 'http://trycrewapp.com/api/auth/signup',
+      url: 'http://trycrewapp.com/api/auth/update',
       data: user
     })
     .then(function(resp){
+      $localStorage.groupname = resp.data.group;
+      $localStorage.question = resp.data.question;
+
+      if(resp.question){
+        $location.path('/chat');
+      }else{
+        $location.path('/question');
+      }
       return resp.data;
     });
   };
 
-  var logout = function(user) {
-    return $http({
-      method: 'POST',
-      url: 'http://trycrewapp.com/api/auth/',
-      data: user
-    })
-    .then(function(resp){
-      return resp.data;
-    });
+  var validate = function() {
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.hasOwnProperty('question') === true &&
+        $localStorage.hasOwnProperty('groupname') === true &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+      return true;
+    }else{
+      alert('You are not signed in');
+      $location.path('/');
+    }
+  };
+
+
+  var profile = function() {
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+      return $http.get('https://graph.facebook.com/v2.2/me', {
+        params: {
+          access_token: $localStorage.accessToken,
+          fields: 'id,name,gender,location,picture.width(168).height(168)',
+          format: 'json'
+        }
+      }).then(function(result) {
+        $localStorage.name = result.data.name;
+        $localStorage.gender = result.data.gender;
+        $localStorage.id = result.data.id;
+        $localStorage.picture = result.data.picture.data.url;
+
+
+        return sendProfile({
+          id: result.data.id,
+          name: result.data.name,
+          gender: result.data.gender,
+          picture: result.data.picture.data.url,
+          token: $localStorage.accessToken
+        }).then(function(result){
+          return result;
+        });
+
+      }).catch(function(error){
+        alert('Error: ' + error);
+        $location.path('/');
+      });
+    }else {
+      alert('Not signed in!');
+      $location.path('/');
+    }
+  };
+
+  var logout = function() {
+    $localStorage.$reset();
+    $location.path('/');
   };
 
   return {
     login: login,
-    signup: signup,
-    logout: logout
+    logout: logout,
+    validate: validate,
+    profile: profile,
+    fbLogin: fbLogin
   };
 })
-.factory('Sockets', function($http){
+.factory('Question', function($http, $localStorage){
 
-  var connect = function(){
-    return 'Socket:connect needs to be defined';
+  var getRandom = function(){
+    return $http({
+      method: 'GET',
+      url: 'http://trycrewapp.com/api/question/random'
+    })
+    .then(function(resp){
+      return resp.data;
+    });
   };
 
-  var disconnect = function() {
-    return 'Sockets:disconnect needs to be defined';
+  var setQuestion = function(answers){
+
+    if($localStorage.hasOwnProperty('accessToken') === true &&
+        $localStorage.hasOwnProperty('expiresIn') === true &&
+        $localStorage.hasOwnProperty('question') === true &&
+        $localStorage.question === false &&
+        $localStorage.expiresIn > Math.floor(Date.now()/1000)) {
+
+      return $http({
+        method: 'POST',
+        url: 'http://trycrewapp.com/api/question/set',
+        data: {
+          qres: answers,
+          token: $localStorage.accessToken
+        }
+      })
+      .then(function(resp){
+        return resp;
+      });
+    }else{
+      alert('Something went wrong');
+    }
   };
 
   return {
-    connect: connect,
-    disconnect: disconnect
+    getRandom: getRandom,
+    setQuestion: setQuestion
   };
+
+})
+.factory('Sockets', function(socketFactory){
+  var myIoSocket = io.connect('http://chat.trycrewapp.com');
+
+  var mySocket = socketFactory({
+      ioSocket: myIoSocket
+    });
+
+  return mySocket;
 
 })
 .factory('Groups', function($http){
@@ -113,4 +218,8 @@ angular.module('crewapp.services', [])
     messages: messages,
     list: list
   };
+})
+.factory('plansFactory', function() {
+  var services = {};
+  return services;
 });
