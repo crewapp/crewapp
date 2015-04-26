@@ -311,6 +311,14 @@ td-card.card-2 {
 }
 */
 
+td-cards {
+  display: block;
+}
+
+td-card {
+  display: block;
+}
+
 td-card .image {
   position: relative;
 }
