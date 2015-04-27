@@ -171,7 +171,7 @@
   top: 10px;
   left: 3.85px;
   height: 34px !important;
-  width: 320px;
+  width: 397px;
   border: none;
 }
 
@@ -275,6 +275,9 @@
   margin-top: 0px;
 }
 
+input::-webkit-input-placeholder {
+    padding-top: 5px;
+}
 
 .bg-form-signup {
   background-image: -webkit-image-set(

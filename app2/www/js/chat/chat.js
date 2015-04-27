@@ -26,7 +26,9 @@ angular.module('crewapp.chat', [])
   var random = nonce(10);
 
 	$scope.form = {};
-  Sockets.emit('join room', 'potatoes');
+  var room = $localStorage.groupname || 'potatoes';
+  $scope.picture = $localStorage.picture || 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfp1/v/t1.0-1/c59.0.200.200/p200x200/10354686_10150004552801856_220367501106153455_n.jpg?oh=22570f4a9d45560db6ba27910a22d532&oe=55CECC25&__gda__=1436448341_fa2aaf8a93f5542367e8d82392fd2ea7';
+  Sockets.emit('join room', room);
   var temp = $localStorage.name || 'anon';
   $scope.name = temp.split(' ')[0] || 'anon';
 
@@ -34,7 +36,7 @@ angular.module('crewapp.chat', [])
     var message = {
       name: $scope.name,
       message: $scope.form.itemToAdd,
-      picture: $localStorage.picture
+      picture: $scope.picture
     };
     Sockets.emit('message', message);
   };
