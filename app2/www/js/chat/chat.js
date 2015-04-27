@@ -28,13 +28,14 @@ angular.module('crewapp.chat', [])
     $scope.name = $localStorage.name
 
     $scope.addItem = function() {
-	  Sockets.emit('message', $scope.form.itemToAdd);
+      var message = {name: $localStorage.name, message: $scope.form.itemToAdd, picture: $localStorage.picture}
+	    Sockets.emit('message', message);
     }
     
     Sockets.on('message', function(message) {
       var key = Date.now() + random();
-	  $scope.messages.push({key: key, message: message});
-	  $ionicScrollDelegate.scrollBottom();
+	    $scope.messages.push({key: key, message: message.message, name: message.name, picture: message.picture});
+	    $ionicScrollDelegate.scrollBottom();
     })
     
     $scope.messages = []
