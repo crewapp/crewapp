@@ -2,9 +2,8 @@
   <ion-content class="bg-chat" scroll="false">
   <a href="#/swipe" class="nav-back"></a>
 
-  <div class="chat-view">
+  <div ng-class="isFocused ? 'chat-view' : 'chat-view-keyboard'">
     <ion-content>
-         
         <div class="message-container" ng-repeat="(key, value) in messages">
         <img class="profile-picture" src="{{ value.picture }}" />
           <div class="top-message"></div>
@@ -15,13 +14,13 @@
           </div>
           <div class="bottom-message"></div>
         </div>
-
     </ion-content>
   </div>
-  
-  <form ng-submit="addItem()">
-  	<input type="text" class="chat-form" placeholder="Type in your message..." ng-model="form.itemToAdd"/>
-  	<!-- <input type="submit" /> -->
-  </form>
 
+  <form ng-submit="addItem()" >
+    <div ng-class="isFocused ? 'chat-form' : 'chat-form-keyboard'">
+    	<input type="text" class="chat-input" placeholder="Type in your message..." ng-model="form.itemToAdd" ng-focus="isFocused = true" ng-blur="isFocused = false" />
+    </div>
+  	<!-- <input type="submit" class="chat-submit" /> -->
+  </form>
 </ion-view>

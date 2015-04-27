@@ -90,7 +90,7 @@
   margin-top: 0px;
 }
 
-/* Chat room styles */ 
+/* Chat room styles */
 
 .profile-picture {
   border-radius: 200px;
@@ -116,12 +116,63 @@
 .chat-view {
   position: absolute;
   margin-top: 82.9px;
+  height: 332.62px;
+  width: 414px;
+  background: #FFFEF5;
+  font-family: "Avenir Next";
+  font-size: 18px;
+  border: 0px solid #979797;
+}
+
+.chat-view-keyboard {
+  position: absolute;
+  margin-top: 82.9px;
   height: 603.62px;
   width: 414px;
   background: #FFFEF5;
   font-family: "Avenir Next";
   font-size: 18px;
   border: 0px solid #979797;
+}
+
+.chat-form {
+  position: absolute;
+  background-image: -webkit-image-set(
+    url('../img/chatroom.png') 1x,
+    url('../img/chatroom@2x.png') 2x,
+    url('../img/chatroom@3x.png') 3x
+  );
+  width: 414px;
+  top: 412.75px;
+  height: 52px;
+  background-position: center bottom;
+}
+
+.chat-form-keyboard {
+  position: absolute;
+  background-image: -webkit-image-set(
+    url('../img/chatroom.png') 1x,
+    url('../img/chatroom@2x.png') 2x,
+    url('../img/chatroom@3x.png') 3x
+  );
+  width: 414px;
+  height: 52px;
+  top: 683.75px;
+  background-position: center bottom;
+  border: none;
+}
+
+.chat-input {
+  position: absolute;
+  background-color: transparent;
+  font-family: "Avenir Next";
+  font-size: 1.3em !important;
+  padding: 10px !important;
+  top: 10px;
+  left: 3.85px;
+  height: 34px !important;
+  width: 320px;
+  border: none;
 }
 
 .message-bubble {
@@ -195,19 +246,6 @@
   background-repeat: no-repeat;
 }
 
-.chat-form {
-  position: absolute;
-  background-color: transparent;
-  font-family: "Avenir Next";
-  font-size: 1.3em !important;
-  padding: 10px !important;
-  
-  left: 8.85px;
-  top: 693.75px;
-  height: 34px !important;
-  width: 320px;
-  border: none;
-}
 
 .nav-back {
   position: absolute;
