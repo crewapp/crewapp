@@ -21,6 +21,8 @@ angular.module('crewapp.chat', [])
       }
     }
 
+    var random = nonce(10);
+
 	$scope.form = {};
     Sockets.emit('join room', 'potatoes');
     $scope.name = $localStorage.name
@@ -28,10 +30,13 @@ angular.module('crewapp.chat', [])
     $scope.addItem = function() {
 	  Sockets.emit('message', $scope.form.itemToAdd);
     }
+    
     Sockets.on('message', function(message) {
-	  $scope.messages.push(message);
+      var key = Date.now() + random();
+	  $scope.messages.push({key: key, message: message});
 	  $ionicScrollDelegate.scrollBottom();
     })
     
     $scope.messages = []
+
 });
