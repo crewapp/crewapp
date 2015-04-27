@@ -6,11 +6,11 @@
     <ion-content>
          
         <div class="message-container" ng-repeat="(key, value) in messages">
-        <img class="profile-picture" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p200x200/1725391_749024898509885_2564758593425765158_n.jpg?oh=d57a7f7f0015d885703a36a94e182147&oe=55A0B4D0&__gda__=1440945087_feb3595d750823e719b5799a1357bbe9" />
+        <img class="profile-picture" src="{{ value.picture }}" />
           <div class="top-message"></div>
           <div class="message-bubble">
             <div class="message-text">
-            {{ name }} : {{ value }}
+              <b>{{ value.name }}</b> : {{ value.message }}
             </div>
           </div>
           <div class="bottom-message"></div>
