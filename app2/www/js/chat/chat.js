@@ -11,7 +11,7 @@ angular.module('crewapp.chat', [])
     }
 
     return function() {
-      var now = Math.pow(10, 2) * +new Date()
+      var now = Math.pow(10, 2) * +new Date();
       if (now === last) {
           repeat++;
       } else {
@@ -26,20 +26,26 @@ angular.module('crewapp.chat', [])
   var random = nonce(10);
 
 	$scope.form = {};
-    Sockets.emit('join room', 'potatoes');
-    $scope.name = $localStorage.name
+  Sockets.emit('join room', 'potatoes');
+  var temp = $localStorage.name || 'anon';
+  $scope.name = temp.split(' ')[0] || 'anon';
 
-    $scope.addItem = function() {
-      var message = {name: $localStorage.name, message: $scope.form.itemToAdd, picture: $localStorage.picture}
-	    Sockets.emit('message', message);
+  $scope.addItem = function() {
+    var message = {
+      name: $scope.name,
+      message: $scope.form.itemToAdd,
+      picture: $localStorage.picture
     };
+    Sockets.emit('message', message);
+  };
 
-    Sockets.on('message', function(message) {
-      var key = Date.now() + random();
-	    $scope.messages.push({key: key, message: message.message, name: message.name, picture: message.picture});
-	    $ionicScrollDelegate.scrollBottom();
-    });
+  Sockets.on('message', function(message) {
+    var key = Date.now() + random();
+    $scope.messages.push({key: key, message: message.message, name: message.name, picture: message.picture});
+    $ionicScrollDelegate.scrollBottom();
+    $scope.form.itemToAdd = '';
+  });
 
-    $scope.messages = [];
+  $scope.messages = [];
 
 });
