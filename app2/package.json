@@ -22,5 +22,6 @@
   ],
   "cordovaPlatforms": [
     "ios"
-  ]
+  ],
+  "collide": "driftyco/collide"
 }
