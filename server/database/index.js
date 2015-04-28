@@ -104,19 +104,19 @@ sequelize.sync({force: true}).then(function(){
   Question.bulkCreate(
   [
     { choiceOne: 'Mac',       choiceTwo: 'Windows' },
-    { choiceOne: 'Taco',      choiceTwo: 'Burgers' },
+    { choiceOne: 'Tacos',     choiceTwo: 'Burgers' },
     { choiceOne: 'Stanford',  choiceTwo: 'Cal' },
     { choiceOne: 'Five Guys', choiceTwo: 'In-n-out' },
-    { choiceOne: 'Bart',      choiceTwo: 'Bus' },
+    { choiceOne: 'Bart',      choiceTwo: 'Muni' },
     { choiceOne: 'Walmart',   choiceTwo: 'Target' },
     { choiceOne: 'Apple',     choiceTwo: 'Google' },
     { choiceOne: 'Netflix',   choiceTwo: 'Amazon' },
-    { choiceOne: 'Uber',      choiceTwo: 'Lift' },
+    { choiceOne: 'Uber',      choiceTwo: 'Lyft' },
     { choiceOne: 'Dive Bar',  choiceTwo: 'Club' },
     { choiceOne: 'Five Guys', choiceTwo: 'In-n-out' },
     { choiceOne: 'Coke',      choiceTwo: 'Pepsi'}
   ]).then(function(){
-    console.log('compelted adding base questions!');
+    console.log('completed adding base questions!');
   });
 });
 
