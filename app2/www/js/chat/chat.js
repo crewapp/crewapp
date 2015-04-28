@@ -1,6 +1,6 @@
 'use strict';
 angular.module('crewapp.chat', [])
-.controller('ChatController', function($scope, Sockets, $localStorage, $ionicScrollDelegate){
+.controller('ChatController', function($scope, Auth, Sockets, $localStorage, $ionicScrollDelegate){
 
 	var nonce = function(length) {
     var last = null;
@@ -25,6 +25,9 @@ angular.module('crewapp.chat', [])
 
   var random = nonce(10);
 
+  $scope.logout = function(){
+    Auth.logout();
+  }
   $scope.voteAtext = 'VOTE';
   $scope.voteBtext = 'VOTE';
   $scope.vote = function(arg) {
