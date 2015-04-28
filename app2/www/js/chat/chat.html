@@ -8,11 +8,29 @@
         <div class="message-container" ng-repeat="(key, value) in messages">
         <img class="profile-picture" src="{{ value.picture }}" />
           <div class="top-message"></div>
+
           <div class="message-bubble">
-            <div class="message-text">
-              <b>{{ value.name }}</b> : {{ value.message }}
+            
+            <div class="message-text" ng-if="value.message">
+              <b>{{ value.name }}</b>: {{ value.message }}
             </div>
+            
+            <div class="event-images" ng-if="value.event1">
+              <div class="poll-chat">
+                <b>{{ value.name }}</b>: Let's go to one of these:
+              </div>
+              <div class="event-photos">
+                <img class="event-pic" src="{{value.event1.photo}}" />
+                <a class="btn-q" ng-class="{'poll-btn': !voteA, 'poll-btn-selected': voteA}" ng-model="voteA" ng-click="vote(0)">{{voteAtext}}</a>
+              </div>
+              <div class="event-photos">
+                <img class="event-pic" src="{{value.event2.photo}}" />
+                <a class="btn-q" ng-class="{'poll-btn': !voteB, 'poll-btn-selected': voteB}" ng-model="voteB" ng-click="vote(1)">{{voteBtext}}</a>
+              </div>
+            </div>
+
           </div>
+
           <div class="bottom-message"></div>
         </div>
     </ion-content>
