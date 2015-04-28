@@ -50,8 +50,22 @@ io.sockets.on('connection', function(socket) {
    console.log(err);
   });
 
+  socket.on('poll', function(poll) {
+    io.sockets.in(socket.room).emit('poll', poll);
+  });
+
   socket.on('message', function(chat) {
     io.sockets.in(socket.room).emit('message', chat);
+
+    /* auto respond for presentation */
+    if(chat.message === 'Hey!'){
+      io.sockets.in(socket.room).emit('message', {
+        message: 'Hey Pavan! Where should we go today?',
+        name: 'Arian',
+        picture: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/v/t1.0-1/c0.0.200.200/p200x200/1424303_10152024237802556_1898622173_n.jpg?oh=846d963201736ee369c22c25df00fda4&oe=55DD40DD&__gda__=1440400870_adc0fd39bcedf6fa029508f9c13eb6cd'
+      });
+    }
+
   });
 });
 
